@@ -453,6 +453,220 @@ courses = [
         ],
         "tags": ["核心课", "编程", "难但值得"],
         "description": "计算机科学核心课程，涵盖基本数据结构和算法设计与分析。"
+    },
+    # 更多 icourse.club 真实课程
+    {
+        "id": "EE495",
+        "code": "EE201",
+        "name": "信号与系统",
+        "nameEn": "Signals and Systems",
+        "department": "信息科学技术学院",
+        "credits": 3,
+        "schedule": [
+            {"day": 1, "startTime": "10:00", "endTime": "11:35", "location": "3B-201"},
+            {"day": 3, "startTime": "10:00", "endTime": "11:35", "location": "3B-201"}
+        ],
+        "instructor": "郭武",
+        "difficulty": 3.0,
+        "workload": 3,
+        "rating": 10.0,
+        "gradeDistribution": {"A": 45, "B": 40, "C": 12, "D": 3},
+        "reviews": [
+            {"content": "郭老师讲课非常清晰，信号与系统讲得透彻！", "rating": 5, "author": "电子信息", "date": "2024-12"},
+            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "通信专业", "date": "2024-01"},
+            {"content": "信号处理的基础课，强烈推荐", "rating": 5, "author": "大四", "date": "2023-12"}
+        ],
+        "tags": ["专业课", "电子", "信号处理", "满分推荐"],
+        "description": "信号与系统课程，讲解连续时间和离散时间信号与系统的分析方法。"
+    },
+    {
+        "id": "MATH19511",
+        "code": "MATH103",
+        "name": "数学分析(B1)",
+        "nameEn": "Mathematical Analysis B1",
+        "department": "数学科学学院",
+        "credits": 5,
+        "schedule": [
+            {"day": 2, "startTime": "10:00", "endTime": "11:35", "location": "5-203"},
+            {"day": 4, "startTime": "10:00", "endTime": "11:35", "location": "5-203"},
+            {"day": 5, "startTime": "14:00", "endTime": "15:35", "location": "5-203"}
+        ],
+        "instructor": "李娟",
+        "difficulty": 3.0,
+        "workload": 3,
+        "rating": 10.0,
+        "gradeDistribution": {"A": 42, "B": 42, "C": 13, "D": 3},
+        "reviews": [
+            {"content": "李娟老师讲课非常好，数分推荐！", "rating": 5, "author": "数学系", "date": "2024-12"},
+            {"content": "满分课程，老师特别耐心", "rating": 5, "author": "大一", "date": "2024-01"},
+            {"content": "课程难度中等，给分超好", "rating": 5, "author": "匿名", "date": "2023-12"}
+        ],
+        "tags": ["基础课", "数学", "必修", "满分推荐"],
+        "description": "数学分析B1，李娟老师主讲，数学专业基础必修课。"
+    },
+    {
+        "id": "MATH13220",
+        "code": "MATH201",
+        "name": "线性代数(B1)",
+        "nameEn": "Linear Algebra B1",
+        "department": "数学科学学院",
+        "credits": 3,
+        "schedule": [
+            {"day": 1, "startTime": "14:00", "endTime": "16:25", "location": "5-301"},
+            {"day": 4, "startTime": "08:00", "endTime": "09:35", "location": "5-301"}
+        ],
+        "instructor": "许小卫",
+        "difficulty": 2.5,
+        "workload": 3,
+        "rating": 9.8,
+        "gradeDistribution": {"A": 40, "B": 42, "C": 15, "D": 3},
+        "reviews": [
+            {"content": "许老师讲线代特别清楚，工科必修课推荐！", "rating": 5, "author": "工科生", "date": "2026-01"},
+            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "机械系", "date": "2024-12"},
+            {"content": "线性代数基础打得好，后续课程轻松", "rating": 5, "author": "大三", "date": "2024-01"}
+        ],
+        "tags": ["基础课", "数学", "必修", "热门"],
+        "description": "线性代数(B1)，许小卫老师主讲，工科专业必修的线性代数课程。"
+    },
+    {
+        "id": "ART294",
+        "code": "ART201",
+        "name": "交响乐赏析",
+        "nameEn": "Symphony Appreciation",
+        "department": "人文学院",
+        "credits": 2,
+        "schedule": [
+            {"day": 3, "startTime": "19:00", "endTime": "21:25", "location": "人文楼-报告厅"}
+        ],
+        "instructor": "汪源",
+        "difficulty": 1.5,
+        "workload": 1,
+        "rating": 9.7,
+        "gradeDistribution": {"A": 65, "B": 28, "C": 5, "D": 2},
+        "reviews": [
+            {"content": "听交响乐就能拿学分，超级水课！", "rating": 5, "author": "理科生", "date": "2026-01"},
+            {"content": "课程难度简单，作业很少，给分超好", "rating": 5, "author": "刷分党", "date": "2024-12"},
+            {"content": "虽然收获一般，但轻松拿A", "rating": 4, "author": "匿名", "date": "2024-01"}
+        ],
+        "tags": ["通识课", "艺术", "水课", "给分高"],
+        "description": "交响乐赏析课程，通过欣赏经典交响乐作品培养音乐素养。"
+    },
+    {
+        "id": "PHY4524",
+        "code": "PHY301",
+        "name": "理论力学A",
+        "nameEn": "Theoretical Mechanics A",
+        "department": "物理学院",
+        "credits": 4,
+        "schedule": [
+            {"day": 1, "startTime": "08:00", "endTime": "09:35", "location": "2-301"},
+            {"day": 3, "startTime": "08:00", "endTime": "09:35", "location": "2-301"}
+        ],
+        "instructor": "潘海俊",
+        "difficulty": 4.5,
+        "workload": 5,
+        "rating": 9.7,
+        "gradeDistribution": {"A": 28, "B": 45, "C": 22, "D": 5},
+        "reviews": [
+            {"content": "潘老师讲理论力学非常深入，虽然难但值得！", "rating": 5, "author": "物理系", "date": "2025-01"},
+            {"content": "课程难度困难，作业很多，但给分超好，收获很多", "rating": 5, "author": "力学专业", "date": "2024-12"},
+            {"content": "理论力学天花板，物理专业必选", "rating": 5, "author": "大四", "date": "2024-01"}
+        ],
+        "tags": ["专业课", "物理", "高难度", "力学"],
+        "description": "理论力学A，潘海俊老师主讲，物理专业核心课程，深入讲解分析力学。"
+    },
+    {
+        "id": "ART6040",
+        "code": "ART202",
+        "name": "西方油画艺术赏析",
+        "nameEn": "Western Oil Painting Appreciation",
+        "department": "人文学院",
+        "credits": 2,
+        "schedule": [
+            {"day": 4, "startTime": "19:00", "endTime": "20:35", "location": "人文楼-画室"}
+        ],
+        "instructor": "郭浩",
+        "difficulty": 1.5,
+        "workload": 1,
+        "rating": 9.8,
+        "gradeDistribution": {"A": 62, "B": 30, "C": 6, "D": 2},
+        "reviews": [
+            {"content": "郭老师讲课生动有趣，还能动手画油画！", "rating": 5, "author": "艺术爱好者", "date": "2026-01"},
+            {"content": "课程难度简单，作业很少，给分超好，收获很多", "rating": 5, "author": "理科生", "date": "2024-12"},
+            {"content": "通识课里的宝藏课程", "rating": 5, "author": "大二", "date": "2024-01"}
+        ],
+        "tags": ["通识课", "艺术", "水课", "给分高"],
+        "description": "西方油画艺术赏析，郭浩老师主讲，通过欣赏和创作了解西方油画艺术。"
+    },
+    {
+        "id": "EE4989",
+        "code": "EE202",
+        "name": "电路基本理论",
+        "nameEn": "Basic Circuit Theory",
+        "department": "信息科学技术学院",
+        "credits": 3,
+        "schedule": [
+            {"day": 2, "startTime": "10:00", "endTime": "11:35", "location": "3B-202"},
+            {"day": 5, "startTime": "10:00", "endTime": "11:35", "location": "3B-202"}
+        ],
+        "instructor": "胡新伟",
+        "difficulty": 3.0,
+        "workload": 3,
+        "rating": 9.8,
+        "gradeDistribution": {"A": 42, "B": 40, "C": 15, "D": 3},
+        "reviews": [
+            {"content": "胡老师讲电路非常清晰，电子专业必修课！", "rating": 5, "author": "电子信息", "date": "2026-01"},
+            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "自动化", "date": "2024-12"},
+            {"content": "电路基础打得好，模电数电轻松学", "rating": 5, "author": "大三", "date": "2024-01"}
+        ],
+        "tags": ["专业课", "电子", "必修", "热门"],
+        "description": "电路基本理论，胡新伟老师主讲，电子信息类专业必修基础课程。"
+    },
+    {
+        "id": "PE1556",
+        "code": "PE104",
+        "name": "基础体育",
+        "nameEn": "Basic Physical Education",
+        "department": "体育教学部",
+        "credits": 1,
+        "schedule": [
+            {"day": 5, "startTime": "15:45", "endTime": "17:20", "location": "东区体育场"}
+        ],
+        "instructor": "吴成林",
+        "difficulty": 1.5,
+        "workload": 1,
+        "rating": 9.9,
+        "gradeDistribution": {"A": 75, "B": 20, "C": 4, "D": 1},
+        "reviews": [
+            {"content": "吴老师人很好，基础体育轻松过！", "rating": 5, "author": "大一", "date": "2025-01"},
+            {"content": "课程难度中等，作业很少，给分超好，收获很多", "rating": 5, "author": "匿名", "date": "2024-12"},
+            {"content": "体育课里的良心课程", "rating": 5, "author": "大二", "date": "2024-01"}
+        ],
+        "tags": ["体育课", "水课", "给分高", "必修"],
+        "description": "基础体育课程，吴成林老师主讲，大一必修体育课。"
+    },
+    {
+        "id": "HS20145",
+        "code": "HIS101",
+        "name": "中国近现代史纲要",
+        "nameEn": "Outline of Modern Chinese History",
+        "department": "马克思主义学院",
+        "credits": 2,
+        "schedule": [
+            {"day": 2, "startTime": "14:00", "endTime": "15:35", "location": "5-101"}
+        ],
+        "instructor": "黄鹤",
+        "difficulty": 2.0,
+        "workload": 2,
+        "rating": 9.6,
+        "gradeDistribution": {"A": 50, "B": 35, "C": 12, "D": 3},
+        "reviews": [
+            {"content": "黄老师讲课生动，近代史不再枯燥！", "rating": 5, "author": "大一", "date": "2026-01"},
+            {"content": "课程难度中等，作业很少，给分超好", "rating": 5, "author": "刷分党", "date": "2024-12"},
+            {"content": "思政课里难得的好老师", "rating": 5, "author": "大二", "date": "2024-01"}
+        ],
+        "tags": ["思政课", "必修", "给分高", "热门"],
+        "description": "中国近现代史纲要，黄鹤老师主讲，思政必修课。"
     }
 ]
 

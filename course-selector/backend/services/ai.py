@@ -1,12 +1,10 @@
 import os
 import json
-import anthropic
+import httpx
 from typing import Dict, Any
 
-client = anthropic.Anthropic(
-    api_key=os.getenv("ANTHROPIC_API_KEY", "sk-api-nNHt79hIL5GSXj5DBHSGEhIPsNilUJQBORmHk7vMbLQ0Pkd7MBGluf36N_mix9gl-18cStiunbpljKGYE_tsVLjSVYKA8-FGe-5xZM4HT6QMiCnj4G1bkl4"),
-    base_url=os.getenv("ANTHROPIC_BASE_URL", "https://api.minimaxi.com/anthropic"),
-)
+BASE_URL = "https://api.minimaxi.com/anthropic/v1/messages"
+API_KEY = os.getenv("ANTHROPIC_API_KEY", "sk-api-nNHt79hIL5GSXj5DBHSGEhIPsNilUJQBORmHk7vMbLQ0Pkd7MBGluf36N_mix9gl-18cStiunbpljKGYE_tsVLjSVYKA8-FGe-5xZM4HT6QMiCnj4G1bkl4")
 
 SYSTEM_PROMPT = """你是一个智能选课助手，帮助大学生解析选课需求并推荐最优课程组合。
 
@@ -48,29 +46,39 @@ SYSTEM_PROMPT = """你是一个智能选课助手，帮助大学生解析选课�
 - 只返回JSON，不要其他文字"""
 
 async def parse_user_requirements(user_input: str) -> Dict[str, Any]:
-    """Parse user requirements using MiniMax-M2.1"""
+    """Parse user requirements using MiniMax-M2.1 via HTTP API"""
     try:
-        response = client.messages.create(
-            model="MiniMax-M2.1",
-            max_tokens=2000,
-            system=SYSTEM_PROMPT,
-            messages=[
+        headers = {
+            "Authorization": f"Bearer {API_KEY}",
+            "Content-Type": "application/json"
+        }
+        
+        payload = {
+            "model": "MiniMax-M2.1",
+            "max_tokens": 2000,
+            "system": SYSTEM_PROMPT,
+            "messages": [
                 {"role": "user", "content": user_input}
             ]
-        )
+        }
         
-        content = response.content[0].text
-        
-        # Extract JSON from response
-        json_start = content.find("{")
-        json_end = content.rfind("}") + 1
-        if json_start >= 0 and json_end > json_start:
-            json_str = content[json_start:json_end]
-            parsed = json.loads(json_str)
-            return parsed
-        
-        raise ValueError("无法解析AI响应")
-        
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.post(BASE_URL, headers=headers, json=payload)
+            response.raise_for_status()
+            
+            data = response.json()
+            content = data["content"][0]["text"]
+            
+            # Extract JSON from response
+            json_start = content.find("{")
+            json_end = content.rfind("}") + 1
+            if json_start >= 0 and json_end > json_start:
+                json_str = content[json_start:json_end]
+                parsed = json.loads(json_str)
+                return parsed
+            
+            raise ValueError("无法解析AI响应")
+            
     except Exception as e:
         print(f"AI解析错误: {e}")
         # Return default preferences on error
@@ -119,16 +127,26 @@ async def generate_recommendation_summary(selected_courses, user_input: str, pre
 
 用中文回复，语气友好，像是一个贴心的学长/学姐在给出建议。"""
         
-        response = client.messages.create(
-            model="MiniMax-M2.1",
-            max_tokens=1000,
-            messages=[
+        headers = {
+            "Authorization": f"Bearer {API_KEY}",
+            "Content-Type": "application/json"
+        }
+        
+        payload = {
+            "model": "MiniMax-M2.1",
+            "max_tokens": 1000,
+            "messages": [
                 {"role": "user", "content": prompt}
             ]
-        )
+        }
         
-        return response.content[0].text
-        
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.post(BASE_URL, headers=headers, json=payload)
+            response.raise_for_status()
+            
+            data = response.json()
+            return data["content"][0]["text"]
+            
     except Exception as e:
         print(f"生成总结错误: {e}")
         return "已为您生成最优课程组合，请查看下方课表。"
