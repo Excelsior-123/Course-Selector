@@ -8,9 +8,7 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
-      - key: ANTHROPIC_API_KEY
-        value: sk-api-nNHt79hIL5GSXj5DBHSGEhIPsNilUJQBORmHk7vMbLQ0Pkd7MBGluf36N_mix9gl-18cStiunbpljKGYE_tsVLjSVYKA8-FGe-5xZM4HT6QMiCnj4G1bkl4
-      - key: ANTHROPIC_BASE_URL
-        value: https://api.minimaxi.com/anthropic
+      - key: DEEPSEEK_API_KEY
+        value: sk-4ea33f07d6b44a1b8a55d8d6cfb8b121
       - key: PORT
         value: 3000

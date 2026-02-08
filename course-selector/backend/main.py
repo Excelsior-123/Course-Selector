@@ -92,7 +92,7 @@ class ScheduleGridRequest(BaseModel):
 @app.get("/health")
 def health_check():
     import datetime
-    api_key_status = "configured" if os.getenv("ANTHROPIC_API_KEY") else "missing"
+    api_key_status = "configured" if os.getenv("DEEPSEEK_API_KEY") else "missing"
     return {
         "status": "ok",
         "timestamp": str(datetime.datetime.now()),
@@ -147,7 +147,7 @@ async def recommend(request: RecommendRequest):
         print(f"收到选课请求: {request.input}")
         
         # Check API key
-        api_key = os.getenv("ANTHROPIC_API_KEY")
+        api_key = os.getenv("DEEPSEEK_API_KEY")
         print(f"API Key 状态: {'已设置' if api_key else '未设置'}")
         
         # Step 1: Parse user requirements with AI

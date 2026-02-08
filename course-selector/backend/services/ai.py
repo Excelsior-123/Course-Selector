@@ -3,8 +3,8 @@ import json
 import httpx
 from typing import Dict, Any
 
-BASE_URL = "https://api.minimaxi.com/v1/chat/completions"
-API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
+BASE_URL = "https://api.deepseek.com/v1/chat/completions"
+API_KEY = os.getenv("DEEPSEEK_API_KEY", "sk-4ea33f07d6b44a1b8a55d8d6cfb8b121")
 
 SYSTEM_PROMPT = """你是一个智能选课助手，帮助大学生解析选课需求并推荐最优课程组合。
 
@@ -45,15 +45,15 @@ SYSTEM_PROMPT = """你是一个智能选课助手，帮助大学生解析选课�
 - gradePreference: "high", "medium", "any"
 - 只返回JSON，不要其他文字"""
 
-def make_openai_request(messages: list, max_tokens: int = 2000) -> dict:
-    """Make a request to MiniMax API using OpenAI format"""
+def make_deepseek_request(messages: list, max_tokens: int = 2000) -> dict:
+    """Make a request to DeepSeek API using OpenAI format"""
     headers = {
         "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json"
     }
     
     payload = {
-        "model": "MiniMax-M2.1",
+        "model": "deepseek-chat",
         "messages": messages,
         "max_tokens": max_tokens,
         "temperature": 0.7
@@ -64,7 +64,7 @@ def make_openai_request(messages: list, max_tokens: int = 2000) -> dict:
     return response.json()
 
 async def parse_user_requirements(user_input: str) -> Dict[str, Any]:
-    """Parse user requirements using MiniMax-M2.1 with OpenAI API format"""
+    """Parse user requirements using DeepSeek API"""
     try:
         messages = [
             {"role": "system", "content": SYSTEM_PROMPT},
@@ -73,7 +73,7 @@ async def parse_user_requirements(user_input: str) -> Dict[str, Any]:
         
         import asyncio
         loop = asyncio.get_event_loop()
-        data = await loop.run_in_executor(None, make_openai_request, messages, 2000)
+        data = await loop.run_in_executor(None, make_deepseek_request, messages, 2000)
         
         # Extract content from OpenAI format response
         content = data["choices"][0]["message"]["content"]
@@ -143,7 +143,7 @@ async def generate_recommendation_summary(selected_courses, user_input: str, pre
         
         import asyncio
         loop = asyncio.get_event_loop()
-        data = await loop.run_in_executor(None, make_openai_request, messages, 1000)
+        data = await loop.run_in_executor(None, make_deepseek_request, messages, 1000)
         
         return data["choices"][0]["message"]["content"]
             
