@@ -134,7 +134,9 @@ async def generate_recommendation_summary(selected_courses, user_input: str, pre
 2. 课程组合的优点
 3. 可能的注意事项
 
-用中文回复，语气友好，像是一个贴心的学长/学姐在给出建议。"""
+用中文回复，语气友好，像是一个贴心的学长/学姐在给出建议。
+
+注意：回复中不要包含任何 Markdown 格式符号（如 **、*、#、` 等），使用纯文本即可。"""
         
         messages = [
             {"role": "system", "content": "你是一个贴心的学长/学姐，帮助学生选择课程。"},
