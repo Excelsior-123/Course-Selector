@@ -3,6 +3,7 @@ services:
     name: course-selector
     runtime: python
     plan: free
+    rootDir: .
     buildCommand: pip install -r backend/requirements.txt
     startCommand: cd backend && python main.py
     envVars:
