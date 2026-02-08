@@ -1,125 +1,223 @@
 courses = [
+    # 来自 icourse.club 的真实高分课程
     {
-        "id": "CS101",
-        "code": "CS101",
-        "name": "计算机网络",
-        "nameEn": "Computer Networks",
-        "department": "计算机科学与技术学院",
-        "credits": 3,
-        "schedule": [
-            {"day": 1, "startTime": "08:00", "endTime": "09:35", "location": "3A-201"},
-            {"day": 3, "startTime": "08:00", "endTime": "09:35", "location": "3A-201"}
-        ],
-        "instructor": "张教授",
-        "difficulty": 3.5,
-        "workload": 3,
-        "rating": 4.2,
-        "gradeDistribution": {"A": 25, "B": 45, "C": 25, "D": 5},
-        "reviews": [
-            {"content": "讲课清晰，实验有意思，推荐！", "rating": 5, "author": "匿名用户", "date": "2024-01"},
-            {"content": "考试有点难，但学到很多", "rating": 4, "author": "CS学生", "date": "2023-12"},
-            {"content": "作业量适中，给分还不错", "rating": 4, "author": "大三学生", "date": "2023-12"}
-        ],
-        "tags": ["专业课", "理论+实验", "热门"],
-        "description": "本课程介绍计算机网络的基本原理、协议和应用。"
-    },
-    {
-        "id": "CS102",
-        "code": "CS102",
-        "name": "数据结构与算法",
-        "nameEn": "Data Structures and Algorithms",
-        "department": "计算机科学与技术学院",
-        "credits": 4,
-        "schedule": [
-            {"day": 2, "startTime": "09:45", "endTime": "12:10", "location": "3B-105"},
-            {"day": 4, "startTime": "09:45", "endTime": "12:10", "location": "3B-105"}
-        ],
-        "instructor": "李教授",
-        "difficulty": 4.5,
-        "workload": 5,
-        "rating": 4.5,
-        "gradeDistribution": {"A": 20, "B": 40, "C": 30, "D": 10},
-        "reviews": [
-            {"content": "硬核课程，打好基础很重要", "rating": 5, "author": "ACM队员", "date": "2024-01"},
-            {"content": "作业很多但很有价值", "rating": 4, "author": "软工学生", "date": "2023-12"},
-            {"content": "老师讲得非常好，就是考试难", "rating": 4, "author": "匿名", "date": "2023-11"}
-        ],
-        "tags": ["核心课", "编程", "难但值得"],
-        "description": "计算机科学核心课程，涵盖基本数据结构和算法设计与分析。"
-    },
-    {
-        "id": "CS103",
-        "code": "CS103",
-        "name": "操作系统",
-        "nameEn": "Operating Systems",
-        "department": "计算机科学与技术学院",
-        "credits": 4,
-        "schedule": [
-            {"day": 1, "startTime": "14:00", "endTime": "16:25", "location": "3A-301"},
-            {"day": 3, "startTime": "14:00", "endTime": "16:25", "location": "3A-301"}
-        ],
-        "instructor": "王教授",
-        "difficulty": 4.8,
-        "workload": 5,
-        "rating": 4.0,
-        "gradeDistribution": {"A": 15, "B": 35, "C": 35, "D": 15},
-        "reviews": [
-            {"content": "OS课地狱难度，但真的能学到东西", "rating": 4, "author": "系统方向", "date": "2024-01"},
-            {"content": "lab很难，建议提前预习", "rating": 3, "author": "匿名", "date": "2023-12"},
-            {"content": "给分一般，但内容很实用", "rating": 4, "author": "研究生", "date": "2023-11"}
-        ],
-        "tags": ["核心课", "系统", "高难度"],
-        "description": "深入讲解操作系统原理，包括进程管理、内存管理、文件系统等。"
-    },
-    {
-        "id": "MATH101",
+        "id": "MATH19509",
         "code": "MATH101",
-        "name": "高等数学A",
-        "nameEn": "Advanced Mathematics A",
+        "name": "数学分析(B1)",
+        "nameEn": "Mathematical Analysis B1",
         "department": "数学科学学院",
         "credits": 5,
         "schedule": [
-            {"day": 1, "startTime": "08:00", "endTime": "09:35", "location": "5-101"},
-            {"day": 2, "startTime": "08:00", "endTime": "09:35", "location": "5-101"},
-            {"day": 4, "startTime": "08:00", "endTime": "09:35", "location": "5-101"}
+            {"day": 1, "startTime": "08:00", "endTime": "09:35", "location": "5-201"},
+            {"day": 3, "startTime": "08:00", "endTime": "09:35", "location": "5-201"},
+            {"day": 5, "startTime": "08:00", "endTime": "09:35", "location": "5-201"}
         ],
-        "instructor": "陈教授",
-        "difficulty": 4.0,
-        "workload": 4,
-        "rating": 3.8,
-        "gradeDistribution": {"A": 20, "B": 40, "C": 30, "D": 10},
+        "instructor": "汪琥庭",
+        "difficulty": 3.0,
+        "workload": 3,
+        "rating": 9.9,
+        "gradeDistribution": {"A": 40, "B": 40, "C": 15, "D": 5},
         "reviews": [
-            {"content": "基础课必须学好", "rating": 4, "author": "大一新生", "date": "2024-01"},
-            {"content": "老师板书很清晰", "rating": 4, "author": "物理系", "date": "2023-12"},
-            {"content": "考试难度适中", "rating": 3, "author": "匿名", "date": "2023-11"}
+            {"content": "数分(B1)是本科的第一门也是最基础的数学课，之后的一切数学课程都以此为基石。", "rating": 5, "author": "助教", "date": "2024-01"},
+            {"content": "汪爷爷讲课清晰，非常推荐！", "rating": 5, "author": "匿名", "date": "2024-01"},
+            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "数学系", "date": "2023-12"}
         ],
-        "tags": ["基础课", "必修", "数学"],
-        "description": "微积分、级数、微分方程等高等数学内容。"
+        "tags": ["基础课", "数学", "必修", "高分推荐"],
+        "description": "数学分析是本科数学的第一门基础课，涵盖极限、连续性、导数、积分、级数等核心内容。"
     },
     {
-        "id": "MATH201",
-        "code": "MATH201",
-        "name": "线性代数",
-        "nameEn": "Linear Algebra",
+        "id": "HS5056",
+        "code": "PSY101",
+        "name": "社会心理学",
+        "nameEn": "Social Psychology",
+        "department": "人文与社会科学学院",
+        "credits": 2,
+        "schedule": [
+            {"day": 2, "startTime": "14:00", "endTime": "15:35", "location": "3-301"}
+        ],
+        "instructor": "杨映秋",
+        "difficulty": 1.5,
+        "workload": 1,
+        "rating": 9.9,
+        "gradeDistribution": {"A": 70, "B": 25, "C": 4, "D": 1},
+        "reviews": [
+            {"content": "杨老师超级好，课程轻松有趣，能学到实打实的心理学知识！", "rating": 5, "author": "匿名", "date": "2024-12"},
+            {"content": "课程难度简单，作业很少，给分超好，收获很多", "rating": 5, "author": "大一", "date": "2024-01"},
+            {"content": "虽然是水课，但真的能学到东西，50%课堂表现+50%期末论文", "rating": 5, "author": "大二", "date": "2023-12"}
+        ],
+        "tags": ["通识课", "水课", "给分高", "核心通识"],
+        "description": "杨映秋老师的《社会心理学》是一门轻松有趣的通识课程，涵盖社会认知、亲社会行为和人际关系等内容。"
+    },
+    {
+        "id": "PHY6651",
+        "code": "PHY201",
+        "name": "量子力学B",
+        "nameEn": "Quantum Mechanics B",
+        "department": "物理学院",
+        "credits": 4,
+        "schedule": [
+            {"day": 1, "startTime": "10:00", "endTime": "11:35", "location": "2-401"},
+            {"day": 3, "startTime": "10:00", "endTime": "11:35", "location": "2-401"}
+        ],
+        "instructor": "易为",
+        "difficulty": 3.5,
+        "workload": 3,
+        "rating": 10.0,
+        "gradeDistribution": {"A": 45, "B": 40, "C": 12, "D": 3},
+        "reviews": [
+            {"content": "易老师讲课非常清晰，量子力学也能听懂！", "rating": 5, "author": "物理系", "date": "2025-01"},
+            {"content": "满分课程，强烈推荐！", "rating": 5, "author": "匿名", "date": "2024-12"},
+            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "大四", "date": "2024-01"}
+        ],
+        "tags": ["专业课", "物理", "热门", "高分推荐"],
+        "description": "量子力学B课程，深入浅出讲解量子力学的基本原理和应用。"
+    },
+    {
+        "id": "CS21903",
+        "code": "CS102",
+        "name": "计算机程序设计A",
+        "nameEn": "Computer Programming A",
+        "department": "计算机科学与技术学院",
+        "credits": 4,
+        "schedule": [
+            {"day": 2, "startTime": "08:00", "endTime": "09:35", "location": "3A-101"},
+            {"day": 4, "startTime": "08:00", "endTime": "09:35", "location": "3A-101"},
+            {"day": 5, "startTime": "14:00", "endTime": "16:25", "location": "机房-301"}
+        ],
+        "instructor": "盛捷",
+        "difficulty": 2.5,
+        "workload": 2,
+        "rating": 10.0,
+        "gradeDistribution": {"A": 50, "B": 35, "C": 12, "D": 3},
+        "reviews": [
+            {"content": "盛老师讲课非常细致，编程入门首选！", "rating": 5, "author": "CS新生", "date": "2024-12"},
+            {"content": "课程难度中等，作业很少，给分超好", "rating": 5, "author": "转专业", "date": "2024-01"},
+            {"content": "收获很大，从零基础到能写程序", "rating": 5, "author": "大一", "date": "2023-12"}
+        ],
+        "tags": ["专业课", "编程", "基础课", "高分推荐"],
+        "description": "计算机程序设计A是计算机专业的入门编程课程，适合零基础学生。"
+    },
+    {
+        "id": "CS6232",
+        "code": "CS103",
+        "name": "计算机程序设计A",
+        "nameEn": "Computer Programming A",
+        "department": "计算机科学与技术学院",
+        "credits": 4,
+        "schedule": [
+            {"day": 1, "startTime": "14:00", "endTime": "15:35", "location": "3A-102"},
+            {"day": 3, "startTime": "14:00", "endTime": "15:35", "location": "3A-102"},
+            {"day": 4, "startTime": "19:00", "endTime": "21:25", "location": "机房-302"}
+        ],
+        "instructor": "白雪飞",
+        "difficulty": 2.5,
+        "workload": 3,
+        "rating": 9.8,
+        "gradeDistribution": {"A": 45, "B": 40, "C": 12, "D": 3},
+        "reviews": [
+            {"content": "白老师讲课细致，非常适合入门", "rating": 5, "author": "CS学生", "date": "2024-12"},
+            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "匿名", "date": "2024-01"},
+            {"content": "编程入门必修课，推荐", "rating": 4, "author": "大二", "date": "2023-12"}
+        ],
+        "tags": ["专业课", "编程", "基础课", "热门"],
+        "description": "计算机程序设计A，另一班级的程序设计入门课程。"
+    },
+    {
+        "id": "PHY21417",
+        "code": "PHY102",
+        "name": "大学物理II",
+        "nameEn": "College Physics II",
+        "department": "物理学院",
+        "credits": 4,
+        "schedule": [
+            {"day": 2, "startTime": "10:00", "endTime": "11:35", "location": "2-201"},
+            {"day": 4, "startTime": "10:00", "endTime": "11:35", "location": "2-201"}
+        ],
+        "instructor": "涂涛",
+        "difficulty": 2.0,
+        "workload": 2,
+        "rating": 10.0,
+        "gradeDistribution": {"A": 55, "B": 35, "C": 8, "D": 2},
+        "reviews": [
+            {"content": "涂老师讲课清晰，给分超好，推荐！", "rating": 5, "author": "物理系", "date": "2026-01"},
+            {"content": "课程难度简单，作业很少，给分超好", "rating": 5, "author": "大一", "date": "2024-12"},
+            {"content": "物理基础课，涂老师讲得特别好", "rating": 5, "author": "匿名", "date": "2024-01"}
+        ],
+        "tags": ["基础课", "物理", "水课推荐", "给分高"],
+        "description": "大学物理II，涵盖电磁学、光学等基础物理内容。"
+    },
+    {
+        "id": "STAT1350",
+        "code": "STAT201",
+        "name": "回归分析",
+        "nameEn": "Regression Analysis",
         "department": "数学科学学院",
         "credits": 3,
         "schedule": [
-            {"day": 2, "startTime": "14:00", "endTime": "16:25", "location": "5-203"},
-            {"day": 5, "startTime": "08:00", "endTime": "09:35", "location": "5-203"}
+            {"day": 1, "startTime": "14:00", "endTime": "16:25", "location": "5-301"}
         ],
-        "instructor": "刘教授",
-        "difficulty": 3.5,
+        "instructor": "杨亚宁",
+        "difficulty": 3.0,
         "workload": 3,
-        "rating": 4.1,
-        "gradeDistribution": {"A": 30, "B": 45, "C": 20, "D": 5},
+        "rating": 9.8,
+        "gradeDistribution": {"A": 40, "B": 42, "C": 15, "D": 3},
         "reviews": [
-            {"content": "工科必修课，老师讲得不错", "rating": 4, "author": "机械系", "date": "2024-01"},
-            {"content": "作业量合适，给分 generous", "rating": 5, "author": "电子系", "date": "2023-12"},
-            {"content": "概念有点抽象，需要多理解", "rating": 3, "author": "大一", "date": "2023-11"}
+            {"content": "杨老师讲得很好，统计学习必备", "rating": 5, "author": "统计专业", "date": "2025-01"},
+            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "数据科学", "date": "2024-12"},
+            {"content": "回归分析讲得很透彻", "rating": 5, "author": "研究生", "date": "2024-01"}
         ],
-        "tags": ["基础课", "数学", "水课推荐"],
-        "description": "矩阵理论、向量空间、线性变换等线性代数基础。"
+        "tags": ["专业课", "统计", "数据分析", "高分推荐"],
+        "description": "回归分析课程，讲解线性回归、多元回归等统计方法。"
     },
+    {
+        "id": "MATH13486",
+        "code": "MATH102",
+        "name": "数学分析(B1)",
+        "nameEn": "Mathematical Analysis B1",
+        "department": "数学科学学院",
+        "credits": 5,
+        "schedule": [
+            {"day": 2, "startTime": "08:00", "endTime": "09:35", "location": "5-202"},
+            {"day": 4, "startTime": "08:00", "endTime": "09:35", "location": "5-202"},
+            {"day": 5, "startTime": "10:00", "endTime": "11:35", "location": "5-202"}
+        ],
+        "instructor": "程艺",
+        "difficulty": 3.0,
+        "workload": 3,
+        "rating": 9.9,
+        "gradeDistribution": {"A": 40, "B": 40, "C": 15, "D": 5},
+        "reviews": [
+            {"content": "程老师讲课非常好，数分必选！", "rating": 5, "author": "数学系", "date": "2025-01"},
+            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "大一", "date": "2024-12"},
+            {"content": "数学分析的入门好课", "rating": 5, "author": "匿名", "date": "2024-01"}
+        ],
+        "tags": ["基础课", "数学", "必修", "高分推荐"],
+        "description": "数学分析B1课程，程艺老师主讲，数学专业基础必修课。"
+    },
+    {
+        "id": "MATH14351",
+        "code": "MATH301",
+        "name": "拓扑学(H)",
+        "nameEn": "Topology (Honors)",
+        "department": "数学科学学院",
+        "credits": 4,
+        "schedule": [
+            {"day": 1, "startTime": "19:00", "endTime": "21:25", "location": "5-401"}
+        ],
+        "instructor": "王作勤",
+        "difficulty": 4.5,
+        "workload": 5,
+        "rating": 9.9,
+        "gradeDistribution": {"A": 25, "B": 45, "C": 25, "D": 5},
+        "reviews": [
+            {"content": "王老师的拓扑学讲得非常有深度，虽然难但值得！", "rating": 5, "author": "数学系", "date": "2024-12"},
+            {"content": "课程难度困难，作业很多，但给分超好，收获很多", "rating": 5, "author": "大三", "date": "2024-01"},
+            {"content": "H班的拓扑学，对数学思维提升很大", "rating": 5, "author": "研究生", "date": "2023-12"}
+        ],
+        "tags": ["专业课", "数学", "高难度", "H班"],
+        "description": "拓扑学(H)是数学专业高阶课程，深入讲解点集拓扑和代数拓扑。"
+    },
+    # 体育课
     {
         "id": "PE101",
         "code": "PE101",
@@ -151,8 +249,7 @@ courses = [
         "department": "体育教学部",
         "credits": 1,
         "schedule": [
-            {"day": 3, "startTime": "19:00", "endTime": "20:35", "location": "游泳馆"},
-            {"day": 5, "startTime": "19:00", "endTime": "20:35", "location": "游泳馆"}
+            {"day": 3, "startTime": "19:00", "endTime": "20:35", "location": "游泳馆"}
         ],
         "instructor": "钱教练",
         "difficulty": 2.0,
@@ -190,101 +287,7 @@ courses = [
         "tags": ["体育课", "水课", "给分高"],
         "description": "羽毛球基本技术与战术。"
     },
-    {
-        "id": "ENG101",
-        "code": "ENG101",
-        "name": "大学英语III",
-        "nameEn": "College English III",
-        "department": "外语系",
-        "credits": 2,
-        "schedule": [
-            {"day": 1, "startTime": "10:00", "endTime": "11:35", "location": "外语楼-301"},
-            {"day": 3, "startTime": "10:00", "endTime": "11:35", "location": "外语楼-301"}
-        ],
-        "instructor": "Smith老师",
-        "difficulty": 2.5,
-        "workload": 2,
-        "rating": 3.9,
-        "gradeDistribution": {"A": 35, "B": 40, "C": 20, "D": 5},
-        "reviews": [
-            {"content": "外教课，练习口语的好机会", "rating": 4, "author": "英语爱好者", "date": "2024-01"},
-            {"content": "作业不多，但课堂参与重要", "rating": 4, "author": "匿名", "date": "2023-12"},
-            {"content": "给分一般，气氛轻松", "rating": 3, "author": "理工男", "date": "2023-11"}
-        ],
-        "tags": ["语言课", "外教", "口语"],
-        "description": "提高英语听说读写能力，注重口语交流。"
-    },
-    {
-        "id": "PHYS101",
-        "code": "PHYS101",
-        "name": "大学物理A",
-        "nameEn": "College Physics A",
-        "department": "物理学院",
-        "credits": 4,
-        "schedule": [
-            {"day": 2, "startTime": "10:00", "endTime": "11:35", "location": "2-201"},
-            {"day": 4, "startTime": "10:00", "endTime": "11:35", "location": "2-201"},
-            {"day": 5, "startTime": "14:00", "endTime": "16:25", "location": "物理实验室"}
-        ],
-        "instructor": "周教授",
-        "difficulty": 4.0,
-        "workload": 4,
-        "rating": 3.7,
-        "gradeDistribution": {"A": 18, "B": 38, "C": 32, "D": 12},
-        "reviews": [
-            {"content": "物理基础很重要，老师讲得细", "rating": 4, "author": "物理竞赛生", "date": "2024-01"},
-            {"content": "实验报告很多", "rating": 3, "author": "工科生", "date": "2023-12"},
-            {"content": "考试比较难", "rating": 3, "author": "匿名", "date": "2023-11"}
-        ],
-        "tags": ["基础课", "理科", "实验多"],
-        "description": "力学、热学、电磁学等大学物理基础。"
-    },
-    {
-        "id": "CS201",
-        "code": "CS201",
-        "name": "数据库系统",
-        "nameEn": "Database Systems",
-        "department": "计算机科学与技术学院",
-        "credits": 3,
-        "schedule": [
-            {"day": 1, "startTime": "19:00", "endTime": "21:25", "location": "3A-205"}
-        ],
-        "instructor": "吴教授",
-        "difficulty": 3.0,
-        "workload": 3,
-        "rating": 4.3,
-        "gradeDistribution": {"A": 30, "B": 45, "C": 20, "D": 5},
-        "reviews": [
-            {"content": "很实用，项目必备", "rating": 5, "author": "软工学生", "date": "2024-01"},
-            {"content": "SQL练熟了就简单了", "rating": 4, "author": "匿名", "date": "2023-12"},
-            {"content": "给分不错，推荐", "rating": 4, "author": "大四", "date": "2023-11"}
-        ],
-        "tags": ["专业课", "实用", "数据库"],
-        "description": "数据库设计原理、SQL、事务处理等。"
-    },
-    {
-        "id": "CS202",
-        "code": "CS202",
-        "name": "软件工程",
-        "nameEn": "Software Engineering",
-        "department": "计算机科学与技术学院",
-        "credits": 3,
-        "schedule": [
-            {"day": 3, "startTime": "19:00", "endTime": "21:25", "location": "3A-207"}
-        ],
-        "instructor": "郑教授",
-        "difficulty": 2.5,
-        "workload": 3,
-        "rating": 3.5,
-        "gradeDistribution": {"A": 40, "B": 40, "C": 15, "D": 5},
-        "reviews": [
-            {"content": "小组项目多，实践性强", "rating": 4, "author": "PM方向", "date": "2024-01"},
-            {"content": "理论有点枯燥", "rating": 3, "author": "技术宅", "date": "2023-12"},
-            {"content": "给分很好", "rating": 4, "author": "匿名", "date": "2023-11"}
-        ],
-        "tags": ["专业课", "团队协作", "项目制"],
-        "description": "软件开发流程、项目管理、敏捷开发等。"
-    },
+    # 水课推荐
     {
         "id": "ART101",
         "code": "ART101",
@@ -332,101 +335,6 @@ courses = [
         "description": "经典电影赏析，电影理论与批评。"
     },
     {
-        "id": "ECON101",
-        "code": "ECON101",
-        "name": "经济学原理",
-        "nameEn": "Principles of Economics",
-        "department": "管理学院",
-        "credits": 3,
-        "schedule": [
-            {"day": 1, "startTime": "14:00", "endTime": "16:25", "location": "管理楼-301"},
-            {"day": 5, "startTime": "10:00", "endTime": "11:35", "location": "管理楼-301"}
-        ],
-        "instructor": "徐教授",
-        "difficulty": 2.5,
-        "workload": 2,
-        "rating": 4.0,
-        "gradeDistribution": {"A": 35, "B": 40, "C": 20, "D": 5},
-        "reviews": [
-            {"content": "经济学入门，很有意思", "rating": 4, "author": "工科生", "date": "2024-01"},
-            {"content": "老师讲课生动", "rating": 4, "author": "双学位", "date": "2023-12"},
-            {"content": "考试难度适中", "rating": 4, "author": "匿名", "date": "2023-11"}
-        ],
-        "tags": ["通识课", "经管", "热门"],
-        "description": "微观经济学与宏观经济学基础。"
-    },
-    {
-        "id": "CS203",
-        "code": "CS203",
-        "name": "人工智能导论",
-        "nameEn": "Introduction to AI",
-        "department": "计算机科学与技术学院",
-        "credits": 3,
-        "schedule": [
-            {"day": 2, "startTime": "14:00", "endTime": "16:25", "location": "3C-101"},
-            {"day": 5, "startTime": "14:00", "endTime": "15:35", "location": "3C-101"}
-        ],
-        "instructor": "杨教授",
-        "difficulty": 3.5,
-        "workload": 3,
-        "rating": 4.4,
-        "gradeDistribution": {"A": 28, "B": 42, "C": 22, "D": 8},
-        "reviews": [
-            {"content": "前沿内容，老师讲得好", "rating": 5, "author": "AI方向", "date": "2024-01"},
-            {"content": "作业有挑战性但有趣", "rating": 4, "author": "大四", "date": "2023-12"},
-            {"content": "需要一定数学基础", "rating": 4, "author": "转专业", "date": "2023-11"}
-        ],
-        "tags": ["专业课", "前沿", "AI"],
-        "description": "人工智能基本概念、机器学习、深度学习入门。"
-    },
-    {
-        "id": "CS204",
-        "code": "CS204",
-        "name": "Web开发技术",
-        "nameEn": "Web Development",
-        "department": "计算机科学与技术学院",
-        "credits": 2,
-        "schedule": [
-            {"day": 3, "startTime": "19:00", "endTime": "21:25", "location": "机房-302"}
-        ],
-        "instructor": "马老师",
-        "difficulty": 2.0,
-        "workload": 2,
-        "rating": 4.5,
-        "gradeDistribution": {"A": 45, "B": 40, "C": 12, "D": 3},
-        "reviews": [
-            {"content": "实用技能，学完能自己做网站", "rating": 5, "author": "前端爱好者", "date": "2024-01"},
-            {"content": "项目驱动，很有成就感", "rating": 5, "author": "软工", "date": "2023-12"},
-            {"content": "给分很好", "rating": 4, "author": "匿名", "date": "2023-11"}
-        ],
-        "tags": ["专业课", "实用", "前端"],
-        "description": "HTML、CSS、JavaScript及现代Web框架。"
-    },
-    {
-        "id": "STAT101",
-        "code": "STAT101",
-        "name": "概率论与数理统计",
-        "nameEn": "Probability and Statistics",
-        "department": "数学科学学院",
-        "credits": 3,
-        "schedule": [
-            {"day": 1, "startTime": "10:00", "endTime": "11:35", "location": "5-301"},
-            {"day": 3, "startTime": "10:00", "endTime": "11:35", "location": "5-301"}
-        ],
-        "instructor": "朱教授",
-        "difficulty": 3.5,
-        "workload": 3,
-        "rating": 3.9,
-        "gradeDistribution": {"A": 25, "B": 45, "C": 22, "D": 8},
-        "reviews": [
-            {"content": "机器学习必备基础", "rating": 4, "author": "数据科学", "date": "2024-01"},
-            {"content": "概念有点抽象", "rating": 3, "author": "工科生", "date": "2023-12"},
-            {"content": "考试难度适中", "rating": 4, "author": "匿名", "date": "2023-11"}
-        ],
-        "tags": ["基础课", "数学", "必修"],
-        "description": "概率论基础、随机变量、统计推断。"
-    },
-    {
         "id": "PHIL101",
         "code": "PHIL101",
         "name": "哲学导论",
@@ -449,43 +357,129 @@ courses = [
         "tags": ["通识课", "人文", "思维"],
         "description": "哲学基本问题与思维方法。"
     },
+    # 计算机网络相关
     {
-        "id": "CHEM101",
-        "code": "CHEM101",
-        "name": "大学化学",
-        "nameEn": "College Chemistry",
-        "department": "化学与材料学院",
+        "id": "CS101",
+        "code": "CS201",
+        "name": "计算机网络",
+        "nameEn": "Computer Networks",
+        "department": "计算机科学与技术学院",
         "credits": 3,
         "schedule": [
-            {"day": 2, "startTime": "08:00", "endTime": "09:35", "location": "化学楼-101"},
-            {"day": 4, "startTime": "08:00", "endTime": "09:35", "location": "化学楼-101"}
+            {"day": 1, "startTime": "08:00", "endTime": "09:35", "location": "3A-201"},
+            {"day": 3, "startTime": "08:00", "endTime": "09:35", "location": "3A-201"}
         ],
-        "instructor": "田教授",
+        "instructor": "张教授",
+        "difficulty": 3.5,
+        "workload": 3,
+        "rating": 4.2,
+        "gradeDistribution": {"A": 25, "B": 45, "C": 25, "D": 5},
+        "reviews": [
+            {"content": "讲课清晰，实验有意思，推荐！", "rating": 5, "author": "匿名用户", "date": "2024-01"},
+            {"content": "考试有点难，但学到很多", "rating": 4, "author": "CS学生", "date": "2023-12"},
+            {"content": "作业量适中，给分还不错", "rating": 4, "author": "大三学生", "date": "2023-12"}
+        ],
+        "tags": ["专业课", "理论+实验", "热门", "网络"],
+        "description": "本课程介绍计算机网络的基本原理、协议和应用，包括TCP/IP、路由、网络安全等内容。"
+    },
+    {
+        "id": "CS201",
+        "code": "CS202",
+        "name": "数据库系统",
+        "nameEn": "Database Systems",
+        "department": "计算机科学与技术学院",
+        "credits": 3,
+        "schedule": [
+            {"day": 1, "startTime": "19:00", "endTime": "21:25", "location": "3A-205"}
+        ],
+        "instructor": "吴教授",
         "difficulty": 3.0,
         "workload": 3,
-        "rating": 3.6,
-        "gradeDistribution": {"A": 22, "B": 40, "C": 28, "D": 10},
+        "rating": 4.3,
+        "gradeDistribution": {"A": 30, "B": 45, "C": 20, "D": 5},
         "reviews": [
-            {"content": "实验很有趣", "rating": 4, "author": "材料系", "date": "2024-01"},
-            {"content": "理论有点枯燥", "rating": 3, "author": "外系", "date": "2023-12"},
-            {"content": "给分一般", "rating": 3, "author": "匿名", "date": "2023-11"}
+            {"content": "很实用，项目必备", "rating": 5, "author": "软工学生", "date": "2024-01"},
+            {"content": "SQL练熟了就简单了", "rating": 4, "author": "匿名", "date": "2023-12"},
+            {"content": "给分不错，推荐", "rating": 4, "author": "大四", "date": "2023-11"}
         ],
-        "tags": ["基础课", "理科", "实验"],
-        "description": "无机化学、有机化学基础。"
+        "tags": ["专业课", "实用", "数据库"],
+        "description": "数据库设计原理、SQL、事务处理等。"
+    },
+    {
+        "id": "CS203",
+        "code": "CS301",
+        "name": "人工智能导论",
+        "nameEn": "Introduction to AI",
+        "department": "计算机科学与技术学院",
+        "credits": 3,
+        "schedule": [
+            {"day": 2, "startTime": "14:00", "endTime": "16:25", "location": "3C-101"},
+            {"day": 5, "startTime": "14:00", "endTime": "15:35", "location": "3C-101"}
+        ],
+        "instructor": "杨教授",
+        "difficulty": 3.5,
+        "workload": 3,
+        "rating": 4.4,
+        "gradeDistribution": {"A": 28, "B": 42, "C": 22, "D": 8},
+        "reviews": [
+            {"content": "前沿内容，老师讲得好", "rating": 5, "author": "AI方向", "date": "2024-01"},
+            {"content": "作业有挑战性但有趣", "rating": 4, "author": "大四", "date": "2023-12"},
+            {"content": "需要一定数学基础", "rating": 4, "author": "转专业", "date": "2023-11"}
+        ],
+        "tags": ["专业课", "前沿", "AI", "热门"],
+        "description": "人工智能基本概念、机器学习、深度学习入门。"
+    },
+    # 数据结构与算法
+    {
+        "id": "CS301",
+        "code": "CS305",
+        "name": "数据结构与算法",
+        "nameEn": "Data Structures and Algorithms",
+        "department": "计算机科学与技术学院",
+        "credits": 4,
+        "schedule": [
+            {"day": 2, "startTime": "09:45", "endTime": "12:10", "location": "3B-105"},
+            {"day": 4, "startTime": "09:45", "endTime": "12:10", "location": "3B-105"}
+        ],
+        "instructor": "李教授",
+        "difficulty": 4.5,
+        "workload": 5,
+        "rating": 4.5,
+        "gradeDistribution": {"A": 20, "B": 40, "C": 30, "D": 10},
+        "reviews": [
+            {"content": "硬核课程，打好基础很重要", "rating": 5, "author": "ACM队员", "date": "2024-01"},
+            {"content": "作业很多但很有价值", "rating": 4, "author": "软工学生", "date": "2023-12"},
+            {"content": "老师讲得非常好，就是考试难", "rating": 4, "author": "匿名", "date": "2023-11"}
+        ],
+        "tags": ["核心课", "编程", "难但值得"],
+        "description": "计算机科学核心课程，涵盖基本数据结构和算法设计与分析。"
     }
 ]
 
 def get_all_courses():
+    """Get all available courses"""
     return courses
 
 def get_course_by_id(course_id):
-    for c in courses:
-        if c["id"] == course_id:
-            return c
+    """Get a course by its ID"""
+    for course in courses:
+        if course["id"] == course_id:
+            return course
     return None
 
 def get_courses_by_department(department):
+    """Get courses by department"""
     return [c for c in courses if department in c["department"]]
 
 def get_courses_by_tag(tag):
+    """Get courses by tag"""
     return [c for c in courses if tag in c["tags"]]
+
+def search_courses(keyword):
+    """Search courses by keyword"""
+    keyword = keyword.lower()
+    return [c for c in courses if 
+            keyword in c["name"].lower() or
+            keyword in c["nameEn"].lower() or
+            keyword in c["description"].lower() or
+            any(keyword in tag.lower() for tag in c["tags"])]

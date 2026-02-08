@@ -8,9 +8,62 @@ import os
 from dotenv import load_dotenv
 import pathlib
 
-from data.courses import courses, get_all_courses, get_course_by_id
+from data.courses import courses, get_all_courses, get_course_by_id, search_courses
 from services.scheduler import generate_optimal_schedule, generate_schedule_grid
 from services.ai import parse_user_requirements, generate_recommendation_summary
+import re
+
+def extract_preferences_fallback(user_input: str):
+    """Fallback method to extract preferences using keyword matching"""
+    user_input_lower = user_input.lower()
+    
+    # Extract interests based on keywords
+    interest_keywords = {
+        "数学": ["数学分析", "高等数学", "线性代数", "拓扑学", "回归分析"],
+        "计算机": ["计算机", "程序设计", "数据结构", "算法", "人工智能", "数据库", "网络"],
+        "物理": ["物理", "量子力学"],
+        "心理": ["心理学", "社会心理学"],
+        "体育": ["篮球", "羽毛球", "游泳", "体育"],
+        "艺术": ["艺术", "电影", "音乐"],
+        "哲学": ["哲学"]
+    }
+    
+    interests = []
+    for category, keywords in interest_keywords.items():
+        for keyword in keywords:
+            if keyword in user_input_lower:
+                interests.append(keyword)
+                break
+    
+    # Determine preferences
+    prefer_easy = any(kw in user_input_lower for kw in ["简单", "水课", "好拿分", "给分高", "容易"])
+    prefer_light = any(kw in user_input_lower for kw in ["作业少", "轻松", "不费劲"])
+    
+    # Extract time constraints (basic)
+    time_keywords = []
+    if any(kw in user_input_lower for kw in ["上午", "早上"]):
+        time_keywords.append("morning")
+    if any(kw in user_input_lower for kw in ["下午", "晚上", "晚课"]):
+        time_keywords.append("evening")
+    
+    return {
+        "preferences": {
+            "interests": interests,
+            "timeConstraints": {
+                "preferredDays": [1, 2, 3, 4, 5],
+                "preferredTimeRanges": [],
+                "avoidEvening": "晚上" not in user_input_lower and "晚课" in user_input_lower
+            },
+            "difficultyPreference": "easy" if prefer_easy else "any",
+            "workloadPreference": "light" if prefer_light else "any",
+            "gradePreference": "high" if prefer_easy else "any",
+            "requiredCourses": [],
+            "avoidCourses": [],
+            "maxCourses": 6,
+            "priorities": []
+        },
+        "reasoning": f"基于关键词提取：兴趣={interests}, 难度偏好={'简单' if prefer_easy else '任意'}"
+    }
 
 load_dotenv()
 
@@ -38,7 +91,14 @@ class ScheduleGridRequest(BaseModel):
 
 @app.get("/health")
 def health_check():
-    return {"status": "ok", "timestamp": str(__import__('datetime').datetime.now())}
+    import datetime
+    api_key_status = "configured" if os.getenv("ANTHROPIC_API_KEY") else "missing"
+    return {
+        "status": "ok",
+        "timestamp": str(datetime.datetime.now()),
+        "api_key_status": api_key_status,
+        "courses_count": len(courses)
+    }
 
 @app.get("/api/courses")
 def get_courses(department: Optional[str] = None, tag: Optional[str] = None, search: Optional[str] = None):
@@ -86,27 +146,39 @@ async def recommend(request: RecommendRequest):
     try:
         print(f"收到选课请求: {request.input}")
         
-        # Step 1: Parse user requirements with AI
-        ai_result = await parse_user_requirements(request.input)
-        preferences = ai_result["preferences"]
+        # Check API key
+        api_key = os.getenv("ANTHROPIC_API_KEY")
+        print(f"API Key 状态: {'已设置' if api_key else '未设置'}")
         
-        print(f"解析的偏好: {preferences}")
+        # Step 1: Parse user requirements with AI
+        try:
+            ai_result = await parse_user_requirements(request.input)
+            preferences = ai_result["preferences"]
+            print(f"AI 解析成功，偏好: {preferences}")
+        except Exception as ai_error:
+            print(f"AI 解析失败: {ai_error}")
+            # Use basic keyword matching as fallback
+            preferences = extract_preferences_fallback(request.input)
+            print(f"使用备用解析: {preferences}")
         
         # Step 2: Filter courses based on preferences
         available_courses = get_all_courses()
         
-        # Filter by interests
+        # Filter by interests - use search_courses for better matching
         if preferences.get("interests"):
             interest_matches = []
-            for c in available_courses:
-                for interest in preferences["interests"]:
-                    if (interest in c["name"] or 
-                        any(interest in tag for tag in c["tags"]) or
-                        interest in c["description"]):
-                        interest_matches.append(c)
-                        break
+            for interest in preferences["interests"]:
+                # Search in name, description, and tags
+                matches = search_courses(interest)
+                for m in matches:
+                    if m not in interest_matches:
+                        interest_matches.append(m)
+            
             if interest_matches:
                 available_courses = interest_matches
+                print(f"根据兴趣 '{preferences['interests']}' 筛选出 {len(available_courses)} 门课程")
+            else:
+                print(f"未找到与兴趣 '{preferences['interests']}' 匹配的课程，使用全部课程")
         
         # Filter by difficulty preference
         difficulty_pref = preferences.get("difficultyPreference", "any")
