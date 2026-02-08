@@ -10,7 +10,6 @@ venv/
 pip-log.txt
 pip-delete-this-directory.txt
 *.egg-info/
-dist/
 build/
 
 # Environment
@@ -37,3 +36,6 @@ yarn-error.log*
 # Deployment
 .vercel
 .netlify
+
+# Allow frontend dist for deployment
+!frontend/dist/
