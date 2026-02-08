@@ -3,8 +3,22 @@ import json
 import httpx
 from typing import Dict, Any
 
-BASE_URL = "https://api.minimaxi.com/anthropic/v1/messages"
-API_KEY = os.getenv("ANTHROPIC_API_KEY", "sk-api-nNHt79hIL5GSXj5DBHSGEhIPsNilUJQBORmHk7vMbLQ0Pkd7MBGluf36N_mix9gl-18cStiunbpljKGYE_tsVLjSVYKA8-FGe-5xZM4HT6QMiCnj4G1bkl4")
+BASE_URL = "https://api.minimaxi.com/v1/text/chatcompletion_v2"
+API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
+
+def make_minimax_request(payload: dict) -> dict:
+    """Make a request to MiniMax API"""
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json"
+    }
+    
+    # Add API key to payload
+    payload["api_key"] = API_KEY
+    
+    response = httpx.post(BASE_URL, headers=headers, json=payload, timeout=60.0)
+    response.raise_for_status()
+    return response.json()
 
 SYSTEM_PROMPT = """你是一个智能选课助手，帮助大学生解析选课需求并推荐最优课程组合。
 
@@ -46,13 +60,8 @@ SYSTEM_PROMPT = """你是一个智能选课助手，帮助大学生解析选课�
 - 只返回JSON，不要其他文字"""
 
 async def parse_user_requirements(user_input: str) -> Dict[str, Any]:
-    """Parse user requirements using MiniMax-M2.1 via HTTP API"""
+    """Parse user requirements using MiniMax-M2.1"""
     try:
-        headers = {
-            "Authorization": f"Bearer {API_KEY}",
-            "Content-Type": "application/json"
-        }
-        
         payload = {
             "model": "MiniMax-M2.1",
             "max_tokens": 2000,
@@ -62,22 +71,22 @@ async def parse_user_requirements(user_input: str) -> Dict[str, Any]:
             ]
         }
         
-        async with httpx.AsyncClient(timeout=30.0) as client:
-            response = await client.post(BASE_URL, headers=headers, json=payload)
-            response.raise_for_status()
-            
-            data = response.json()
-            content = data["content"][0]["text"]
-            
-            # Extract JSON from response
-            json_start = content.find("{")
-            json_end = content.rfind("}") + 1
-            if json_start >= 0 and json_end > json_start:
-                json_str = content[json_start:json_end]
-                parsed = json.loads(json_str)
-                return parsed
-            
-            raise ValueError("无法解析AI响应")
+        import asyncio
+        loop = asyncio.get_event_loop()
+        data = await loop.run_in_executor(None, make_minimax_request, payload)
+        
+        # Extract content from MiniMax response format
+        content = data["choices"][0]["message"]["content"]
+        
+        # Extract JSON from response
+        json_start = content.find("{")
+        json_end = content.rfind("}") + 1
+        if json_start >= 0 and json_end > json_start:
+            json_str = content[json_start:json_end]
+            parsed = json.loads(json_str)
+            return parsed
+        
+        raise ValueError("无法解析AI响应")
             
     except Exception as e:
         print(f"AI解析错误: {e}")
@@ -127,11 +136,6 @@ async def generate_recommendation_summary(selected_courses, user_input: str, pre
 
 用中文回复，语气友好，像是一个贴心的学长/学姐在给出建议。"""
         
-        headers = {
-            "Authorization": f"Bearer {API_KEY}",
-            "Content-Type": "application/json"
-        }
-        
         payload = {
             "model": "MiniMax-M2.1",
             "max_tokens": 1000,
@@ -140,12 +144,11 @@ async def generate_recommendation_summary(selected_courses, user_input: str, pre
             ]
         }
         
-        async with httpx.AsyncClient(timeout=30.0) as client:
-            response = await client.post(BASE_URL, headers=headers, json=payload)
-            response.raise_for_status()
-            
-            data = response.json()
-            return data["content"][0]["text"]
+        import asyncio
+        loop = asyncio.get_event_loop()
+        data = await loop.run_in_executor(None, make_minimax_request, payload)
+        
+        return data["choices"][0]["message"]["content"]
             
     except Exception as e:
         print(f"生成总结错误: {e}")
