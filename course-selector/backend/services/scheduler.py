@@ -48,53 +48,120 @@ def calculate_course_count(selected_courses):
     """Calculate number of selected courses"""
     return len(selected_courses)
 
-def check_constraints(selected_courses, preferences):
+def is_evening_course(course):
+    """Check if a course has evening sessions (after 18:00)"""
+    for slot in course.get("schedule", []):
+        start_hour = int(slot["startTime"].split(":")[0])
+        if start_hour >= 18:
+            return True
+    return False
+
+def matches_hard_constraints(course, preferences):
     """
-    Check if selected courses meet user constraints.
+    Check if a course matches hard constraints (time, evening avoidance).
+    Returns False if course violates any hard constraint.
+    """
+    time_constraints = preferences.get("timeConstraints", {})
+    
+    # Check evening avoidance - STRICT
+    if time_constraints.get("avoidEvening", False):
+        if is_evening_course(course):
+            return False
+    
+    # Check preferred days
+    preferred_days = time_constraints.get("preferredDays", [])
+    if preferred_days:
+        for slot in course.get("schedule", []):
+            if slot["day"] not in preferred_days:
+                return False
+    
+    # Check avoid days
+    avoid_days = time_constraints.get("avoidDays", [])
+    if avoid_days:
+        for slot in course.get("schedule", []):
+            if slot["day"] in avoid_days:
+                return False
+    
+    # Check preferred time ranges
+    preferred_ranges = time_constraints.get("preferredTimeRanges", [])
+    if preferred_ranges:
+        all_slots_in_range = True
+        for slot in course.get("schedule", []):
+            slot_in_range = False
+            start_mins = time_to_minutes(slot["startTime"])
+            end_mins = time_to_minutes(slot["endTime"])
+            
+            for range_spec in preferred_ranges:
+                range_start = time_to_minutes(range_spec["start"])
+                range_end = time_to_minutes(range_spec["end"])
+                
+                if start_mins >= range_start and end_mins <= range_end:
+                    slot_in_range = True
+                    break
+            
+            if not slot_in_range:
+                all_slots_in_range = False
+                break
+        
+        if not all_slots_in_range:
+            return False
+    
+    return True
+
+def check_final_constraints(selected_courses, preferences):
+    """
+    Final check to ensure all hard constraints are satisfied.
     Returns (is_valid, reason)
     """
-    # Check minimum credits requirement
-    min_credits = preferences.get("minCredits")
-    if min_credits:
-        total_credits = calculate_total_credits(selected_courses)
-        if total_credits < min_credits:
-            return False, f"学分不足：已选{total_credits}学分，要求至少{min_credits}学分"
+    # Check exact courses - MOST IMPORTANT
+    exact_courses = preferences.get("exactCourses")
+    if exact_courses is not None:
+        count = calculate_course_count(selected_courses)
+        if count != exact_courses:
+            return False, f"课程数量不符：已选{count}门，要求恰好{exact_courses}门"
     
-    # Check exact credits requirement
-    exact_credits = preferences.get("exactCredits")
-    if exact_credits:
-        total_credits = calculate_total_credits(selected_courses)
-        if total_credits != exact_credits:
-            return False, f"学分不匹配：已选{total_credits}学分，要求恰好{exact_credits}学分"
-    
-    # Check maximum credits constraint
-    max_credits = preferences.get("maxCredits")
-    if max_credits:
-        total_credits = calculate_total_credits(selected_courses)
-        if total_credits > max_credits:
-            return False, f"学分超限：已选{total_credits}学分，上限{max_credits}学分"
-    
-    # Check minimum courses requirement
+    # Check min courses
     min_courses = preferences.get("minCourses")
-    if min_courses:
+    if min_courses is not None:
         count = calculate_course_count(selected_courses)
         if count < min_courses:
             return False, f"课程数不足：已选{count}门，要求至少{min_courses}门"
     
-    # Check exact courses requirement
-    exact_courses = preferences.get("exactCourses")
-    if exact_courses:
-        count = calculate_course_count(selected_courses)
-        if count != exact_courses:
-            return False, f"课程数不匹配：已选{count}门，要求恰好{exact_courses}门"
-    
-    # Check maximum courses constraint
+    # Check max courses - STRICT
     max_courses = preferences.get("maxCourses", 8)
     count = calculate_course_count(selected_courses)
     if count > max_courses:
         return False, f"课程数超限：已选{count}门，上限{max_courses}门"
     
-    return True, "满足所有约束"
+    # Check exact credits
+    exact_credits = preferences.get("exactCredits")
+    if exact_credits is not None:
+        total_credits = calculate_total_credits(selected_courses)
+        if total_credits != exact_credits:
+            return False, f"学分不匹配：已选{total_credits}学分，要求恰好{exact_credits}学分"
+    
+    # Check min credits
+    min_credits = preferences.get("minCredits")
+    if min_credits is not None:
+        total_credits = calculate_total_credits(selected_courses)
+        if total_credits < min_credits:
+            return False, f"学分不足：已选{total_credits}学分，要求至少{min_credits}学分"
+    
+    # Check max credits
+    max_credits = preferences.get("maxCredits")
+    if max_credits is not None:
+        total_credits = calculate_total_credits(selected_courses)
+        if total_credits > max_credits:
+            return False, f"学分超限：已选{total_credits}学分，上限{max_credits}学分"
+    
+    # Check evening avoidance - STRICT
+    avoid_evening = preferences.get("timeConstraints", {}).get("avoidEvening", False)
+    if avoid_evening:
+        for course in selected_courses:
+            if is_evening_course(course):
+                return False, f"违反晚课限制：{course['name']}包含晚间时段"
+    
+    return True, "满足所有硬性约束"
 
 def calculate_score(selected_courses, preferences=None):
     """Calculate a score for the schedule based on preferences"""
@@ -103,7 +170,7 @@ def calculate_score(selected_courses, preferences=None):
     
     score = 0
     
-    # Rating score (0-50) - higher rating = higher score
+    # Rating score (0-50)
     avg_rating = calculate_average_rating(selected_courses)
     score += avg_rating * 10
     
@@ -119,176 +186,108 @@ def calculate_score(selected_courses, preferences=None):
     if preferences.get("preferLightWorkload"):
         score += max(0, 30 - total_workload * 2)
     
-    # Number of courses bonus
-    score += len(selected_courses) * 3
-    
-    # Credit hours bonus
-    total_credits = calculate_total_credits(selected_courses)
-    score += total_credits * 2
-    
-    # Time preference matching bonus
-    if preferences.get("timeConstraints"):
-        time_score = calculate_time_preference_score(selected_courses, preferences["timeConstraints"])
-        score += time_score
+    # Credit matching bonus
+    exact_credits = preferences.get("exactCredits")
+    if exact_credits:
+        total_credits = calculate_total_credits(selected_courses)
+        credit_diff = abs(total_credits - exact_credits)
+        score -= credit_diff * 10  # Penalty for not matching exact credits
     
     return score
-
-def calculate_time_preference_score(selected_courses, time_constraints):
-    """Calculate how well the schedule matches time preferences"""
-    score = 0
-    preferred_days = time_constraints.get("preferredDays", [1, 2, 3, 4, 5])
-    preferred_ranges = time_constraints.get("preferredTimeRanges", [])
-    avoid_evening = time_constraints.get("avoidEvening", False)
-    
-    for course in selected_courses:
-        for slot in course["schedule"]:
-            # Check day preference
-            if slot["day"] in preferred_days:
-                score += 2
-            
-            # Check time range preference
-            if preferred_ranges:
-                start_mins = time_to_minutes(slot["startTime"])
-                end_mins = time_to_minutes(slot["endTime"])
-                
-                for range_spec in preferred_ranges:
-                    range_start = time_to_minutes(range_spec["start"])
-                    range_end = time_to_minutes(range_spec["end"])
-                    
-                    # Course falls within preferred range
-                    if start_mins >= range_start and end_mins <= range_end:
-                        score += 3
-                        break
-            
-            # Check evening avoidance
-            if avoid_evening:
-                start_hour = int(slot["startTime"].split(":")[0])
-                if start_hour < 18:  # Not evening
-                    score += 1
-    
-    return score
-
-def matches_time_preferences(course, time_constraints):
-    """Check if a course matches time preferences"""
-    if not time_constraints:
-        return True
-    
-    preferred_days = time_constraints.get("preferredDays", [])
-    avoid_days = time_constraints.get("avoidDays", [])
-    preferred_ranges = time_constraints.get("preferredTimeRanges", [])
-    avoid_evening = time_constraints.get("avoidEvening", False)
-    
-    for slot in course["schedule"]:
-        # Check day constraints
-        if avoid_days and slot["day"] in avoid_days:
-            return False
-        
-        if preferred_days and slot["day"] not in preferred_days:
-            return False
-        
-        # Check evening avoidance
-        if avoid_evening:
-            start_hour = int(slot["startTime"].split(":")[0])
-            if start_hour >= 18:
-                return False
-        
-        # Check time range preferences (if specified, at least one slot should match)
-        if preferred_ranges:
-            start_mins = time_to_minutes(slot["startTime"])
-            end_mins = time_to_minutes(slot["endTime"])
-            
-            in_preferred_range = False
-            for range_spec in preferred_ranges:
-                range_start = time_to_minutes(range_spec["start"])
-                range_end = time_to_minutes(range_spec["end"])
-                
-                if start_mins >= range_start and end_mins <= range_end:
-                    in_preferred_range = True
-                    break
-            
-            if not in_preferred_range:
-                return False
-    
-    return True
 
 def generate_optimal_schedule(available_courses, preferences=None):
     """
     Generate an optimal schedule from available courses.
-    Priority: 1. Meet credit/course constraints 2. Optimize based on preferences
+    STRICT PRIORITY:
+    1. Must satisfy exactCourses/maxCourses constraint
+    2. Must satisfy credit constraints
+    3. Must satisfy evening avoidance
+    4. Then optimize for rating, difficulty, etc.
     """
     if preferences is None:
         preferences = {}
     
-    required_courses = preferences.get("requiredCourses", [])
+    # Extract hard constraints
+    exact_courses = preferences.get("exactCourses")
+    max_courses = preferences.get("maxCourses", 8)
+    min_courses = preferences.get("minCourses")
     
-    # Start with required courses
-    selected = list(required_courses)
+    exact_credits = preferences.get("exactCredits")
+    min_credits = preferences.get("minCredits")
+    max_credits = preferences.get("maxCredits")
     
-    # Filter available courses based on time preferences and conflicts
+    avoid_evening = preferences.get("timeConstraints", {}).get("avoidEvening", False)
+    
+    # Determine target course count
+    if exact_courses is not None:
+        target_courses = exact_courses
+    elif max_courses:
+        target_courses = max_courses
+    else:
+        target_courses = 6
+    
+    # Filter courses that match hard constraints
     valid_courses = []
     for c in available_courses:
-        if c["id"] in [s["id"] for s in selected]:
-            continue
-        if has_any_conflict(selected, c):
-            continue
-        if not matches_time_preferences(c, preferences.get("timeConstraints")):
-            continue
-        valid_courses.append(c)
+        if matches_hard_constraints(c, preferences):
+            valid_courses.append(c)
     
-    # Sort by comprehensive score (rating, ease, low workload)
+    print(f"[Scheduler] {len(valid_courses)} courses match hard constraints (from {len(available_courses)})")
+    if avoid_evening:
+        print(f"[Scheduler] Evening courses filtered out")
+    
+    # Sort by comprehensive score for selection priority
     valid_courses.sort(key=lambda c: (
-        c["rating"] * 2,  # High rating
-        (5 - c["difficulty"]) * 1.5,  # Low difficulty
+        c["rating"] * 3,  # High rating is most important
+        (5 - c["difficulty"]) * 2,  # Low difficulty
         (5 - c["workload"])  # Low workload
     ), reverse=True)
     
-    # Phase 1: Meet minimum requirements
-    min_credits = preferences.get("minCredits", 0)
-    min_courses = preferences.get("minCourses", 0)
-    max_courses = preferences.get("maxCourses", 6)
-    max_credits = preferences.get("maxCredits", 25)
+    # Greedily select courses
+    selected = []
     
-    # Add courses until minimums are met
-    for course in valid_courses[:]:
-        if len(selected) >= max_courses:
+    for course in valid_courses:
+        # Check if we've reached course limit
+        if exact_courses is not None:
+            if len(selected) >= exact_courses:
+                break
+        elif len(selected) >= max_courses:
             break
         
-        total_credits = calculate_total_credits(selected)
-        if max_credits and total_credits >= max_credits:
-            break
+        # Check credit constraints before adding
+        test_credits = calculate_total_credits(selected + [course])
+        if max_credits is not None and test_credits > max_credits:
+            continue
+        if exact_credits is not None and test_credits > exact_credits:
+            continue
         
-        if not has_any_conflict(selected, course):
-            selected.append(course)
-            valid_courses.remove(course)
+        # Check conflict
+        if has_any_conflict(selected, course):
+            continue
+        
+        selected.append(course)
     
-    # Check if constraints are satisfied
-    is_valid, reason = check_constraints(selected, preferences)
-    
-    # Phase 2: Optimize by replacing courses if possible
-    if is_valid:
-        # Try to improve the schedule by swapping courses
-        for i, current_course in enumerate(selected):
-            if current_course in required_courses:
-                continue  # Don't replace required courses
-            
-            # Find a better replacement
-            for alternative in valid_courses:
-                # Check if alternative is better
-                if (alternative["rating"] > current_course["rating"] or
-                    (alternative["rating"] == current_course["rating"] and 
-                     alternative["difficulty"] < current_course["difficulty"])):
-                    
-                    # Check if swap maintains validity
-                    test_selection = selected[:i] + selected[i+1:] + [alternative]
-                    still_valid, _ = check_constraints(test_selection, preferences)
-                    
-                    if still_valid and not has_any_conflict(test_selection[:-1], alternative):
-                        selected[i] = alternative
-                        valid_courses.remove(alternative)
-                        valid_courses.append(current_course)
+    # If we need exact credits, try to adjust
+    if exact_credits is not None:
+        current_credits = calculate_total_credits(selected)
+        if current_credits < exact_credits:
+            # Try to add more courses to reach exact credits
+            for course in valid_courses:
+                if course in selected:
+                    continue
+                if len(selected) >= max_courses:
+                    break
+                test_credits = calculate_total_credits(selected + [course])
+                if test_credits <= exact_credits and not has_any_conflict(selected, course):
+                    selected.append(course)
+                    current_credits = test_credits
+                    if current_credits == exact_credits:
                         break
     
-    # Calculate final statistics
+    # Final constraint check
+    is_valid, reason = check_final_constraints(selected, preferences)
+    
+    # Calculate statistics
     stats = {
         "totalCredits": calculate_total_credits(selected),
         "courseCount": calculate_course_count(selected),
@@ -299,6 +298,11 @@ def generate_optimal_schedule(available_courses, preferences=None):
         "constraintsSatisfied": is_valid,
         "constraintsReason": reason if not is_valid else None
     }
+    
+    print(f"[Scheduler] Selected {len(selected)} courses, {stats['totalCredits']} credits")
+    print(f"[Scheduler] Constraints satisfied: {is_valid}")
+    if not is_valid:
+        print(f"[Scheduler] Reason: {reason}")
     
     return {
         "courses": selected,

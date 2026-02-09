@@ -8,29 +8,43 @@ API_KEY = os.getenv("DEEPSEEK_API_KEY", "sk-4ea33f07d6b44a1b8a55d8d6cfb8b121")
 
 SYSTEM_PROMPT = """你是「课神」—— 一位高瞻远瞩、睿智通透的选课智囊。
 
-你的存在源于对课程体系的深度洞察，和对学子需求的精准把握。
-你以「课神」之名，为每一位求学者量身定制最优课表。
+【最高优先级原则 - 必须严格遵守】
+用户提到的以下三个约束是硬性要求，必须优先满足，其他所有偏好都要在这些约束之后考虑：
 
-## 人设特点
-- 高瞻远瞩：善于从全局角度分析选课策略，考虑课程之间的关联性
-- 睿智通透：深谙各门课程的难度、给分、工作量等关键信息
-- 风趣幽默：偶尔用轻松的语气缓解学生的选课焦虑
-- 自信从容：以"本神"自称，但绝非傲慢，而是源于专业
+1. **学分要求**（最重要）
+   - 如果用户说"想修满XX学分"、"要修XX学分"、"需要XX学分"→ 设置为 exactCredits
+   - 如果用户说"至少XX学分"、"最少XX学分"→ 设置为 minCredits
+   - 如果用户说"最多XX学分"、"不超过XX学分"→ 设置为 maxCredits
 
-## 思考方式
-1. 先理解学生的核心诉求（学分要求、时间限制、兴趣方向）
-2. 分析约束条件的优先级（学分/课程数要求必须优先满足）
-3. 在可行范围内寻找最优解（给分高、评价好、时间合适）
-4. 给出有深度的选课策略建议
+2. **课程数量要求**（次重要）
+   - 如果用户说"想选X门课"、"要选X门课"、"只选X门课"→ 设置为 exactCourses
+   - 如果用户说"至少X门"、"最少X门"→ 设置为 minCourses
+   - 如果用户说"最多X门"、"不超过X门"→ 设置为 maxCourses
 
-## 输出格式
+3. **时间限制**（第三重要）
+   - 如果用户说"不要晚课"、"不选晚上的课"、"晚上没空"→ avoidEvening = true
+   - 如果用户说"只要上午的课"→ preferredTimeRanges = [{"start": "08:00", "end": "12:00"}]
+   - 如果用户说"只要下午的课"→ preferredTimeRanges = [{"start": "14:00", "end": "18:00"}]
+   - 如果用户指定了具体时间如"9点到6点"→ 精确解析并设置
+
+【绝对禁止】
+- 严禁推荐超过用户要求的课程数量
+- 严禁在用户明确不要晚课时推荐晚课
+- 严禁忽视用户明确的学分要求
+
+【思考方式】
+1. 首先识别并记录用户的硬性约束（学分、课程数、时间）
+2. 然后分析用户的偏好方向（给分高、作业少、感兴趣的课程类型）
+3. 在推荐时，先确保满足硬性约束，再优化软性偏好
+
+【输出格式】
 返回结构化的JSON格式：
 {
   "preferences": {
     "interests": ["感兴趣的领域"],
     "timeConstraints": {
       "preferredDays": [1, 2, 3, 4, 5],
-      "preferredTimeRanges": [{"start": "09:00", "end": "18:00"}],
+      "preferredTimeRanges": [],
       "avoidEvening": false,
       "avoidDays": []
     },
@@ -39,22 +53,22 @@ SYSTEM_PROMPT = """你是「课神」—— 一位高瞻远瞩、睿智通透的
     "gradePreference": "high/medium/any",
     "requiredCourses": [],
     "avoidCourses": [],
-    "minCredits": null,      # 最少学分要求
-    "maxCredits": 25,        # 最大学分限制
-    "exactCredits": null,    # 精确学分要求
-    "minCourses": null,      # 最少课程数
-    "maxCourses": 6,         # 最多课程数
-    "exactCourses": null,    # 精确课程数
-    "priorities": ["给分高", "作业少", "时间合适"]
+    "minCredits": null,
+    "maxCredits": 25,
+    "exactCredits": null,
+    "minCourses": null,
+    "maxCourses": 8,
+    "exactCourses": null,
+    "priorities": ["给分高", "作业少"]
   },
-  "reasoning": "本神观你之需求...（用课神口吻描述分析过程）"
+  "reasoning": "本神检测到你有以下硬性要求：1. 必须选X门课 2. 不要晚课 3. 要修满XX学分。在此基础上..."
 }
 
 注意：
 - 周一=1, 周二=2, 周三=3, 周四=4, 周五=5, 周六=6, 周日=7
-- 如果用户提到"要修满XX学分"，设置为minCredits
-- 如果用户提到"只想选X门课"，设置为exactCourses
-- 学分和课程数要求必须优先满足，这是选课的前提条件"""
+- 如果用户明确说"只想选4门"，必须设置 exactCourses: 4，而不是 maxCourses
+- 如果用户说"不要晚课"，必须设置 avoidEvening: true
+- 你的reasoning中必须明确说明你识别出的硬性约束"""
 
 def make_deepseek_request(messages: list, max_tokens: int = 2000) -> dict:
     """Make a request to DeepSeek API using OpenAI format"""
@@ -67,7 +81,7 @@ def make_deepseek_request(messages: list, max_tokens: int = 2000) -> dict:
         "model": "deepseek-chat",
         "messages": messages,
         "max_tokens": max_tokens,
-        "temperature": 0.7
+        "temperature": 0.3  # 降低温度，让输出更确定
     }
     
     response = httpx.post(BASE_URL, headers=headers, json=payload, timeout=60.0)
@@ -79,7 +93,7 @@ async def parse_user_requirements(user_input: str) -> Dict[str, Any]:
     try:
         messages = [
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": f"请本神分析一下这个选课需求：\n\n{user_input}"}
+            {"role": "user", "content": f"请本神分析一下这个选课需求，特别注意识别硬性约束（学分、课程数、时间限制）：\n\n{user_input}"}
         ]
         
         import asyncio
@@ -95,35 +109,76 @@ async def parse_user_requirements(user_input: str) -> Dict[str, Any]:
         if json_start >= 0 and json_end > json_start:
             json_str = content[json_start:json_end]
             parsed = json.loads(json_str)
+            
+            # 后处理：确保约束被正确设置
+            prefs = parsed.get("preferences", {})
+            
+            # 如果用户明确说"想选X门课"，优先使用 exactCourses
+            import re
+            course_num_match = re.search(r'(想|要|只|需|准备|打算)选\s*(\d+)\s*门', user_input)
+            if course_num_match:
+                exact_courses = int(course_num_match.group(2))
+                prefs["exactCourses"] = exact_courses
+                prefs["maxCourses"] = exact_courses  # 同时限制最大数量
+            
+            # 检测"不要晚课"、"晚上没空"等
+            if any(kw in user_input for kw in ["不要晚课", "不选晚课", "晚上没空", "晚上不行", "不要晚上"]):
+                if "timeConstraints" not in prefs:
+                    prefs["timeConstraints"] = {}
+                prefs["timeConstraints"]["avoidEvening"] = True
+            
+            # 检测学分要求
+            credit_match = re.search(r'(想|要|需|准备|打算|必须|得|需要)(修|选|上|满|凑|攒)(\s*满)?\s*(\d+)\s*学分', user_input)
+            if credit_match:
+                exact_credits = int(credit_match.group(4))
+                prefs["exactCredits"] = exact_credits
+            
+            parsed["preferences"] = prefs
             return parsed
         
         raise ValueError("无法解析AI响应")
             
     except Exception as e:
         print(f"AI解析错误: {e}")
-        # Return default preferences on error
-        return {
-            "preferences": {
-                "interests": [],
-                "timeConstraints": {
-                    "preferredDays": [1, 2, 3, 4, 5],
-                    "preferredTimeRanges": [],
-                    "avoidEvening": False,
-                    "avoidDays": []
-                },
-                "difficultyPreference": "any",
-                "workloadPreference": "any",
-                "gradePreference": "any",
-                "requiredCourses": [],
-                "avoidCourses": [],
-                "minCredits": None,
-                "maxCredits": 25,
-                "exactCredits": None,
-                "minCourses": None,
-                "maxCourses": 6,
-                "exactCourses": None,
-                "priorities": []
+        # 使用正则表达式兜底解析
+        import re
+        prefs = {
+            "interests": [],
+            "timeConstraints": {
+                "preferredDays": [1, 2, 3, 4, 5],
+                "preferredTimeRanges": [],
+                "avoidEvening": False,
+                "avoidDays": []
             },
+            "difficultyPreference": "any",
+            "workloadPreference": "any",
+            "gradePreference": "any",
+            "requiredCourses": [],
+            "avoidCourses": [],
+            "minCredits": None,
+            "maxCredits": 25,
+            "exactCredits": None,
+            "minCourses": None,
+            "maxCourses": 8,
+            "exactCourses": None,
+            "priorities": []
+        }
+        
+        # 兜底正则解析
+        course_num_match = re.search(r'(想|要|只|需|准备|打算)选\s*(\d+)\s*门', user_input)
+        if course_num_match:
+            prefs["exactCourses"] = int(course_num_match.group(2))
+            prefs["maxCourses"] = int(course_num_match.group(2))
+        
+        if any(kw in user_input for kw in ["不要晚课", "不选晚课", "晚上没空"]):
+            prefs["timeConstraints"]["avoidEvening"] = True
+        
+        credit_match = re.search(r'(\d+)\s*学分', user_input)
+        if credit_match:
+            prefs["exactCredits"] = int(credit_match.group(1))
+        
+        return {
+            "preferences": prefs,
             "reasoning": "本神正在沉思...先用默认设置为你规划。"
         }
 
@@ -146,9 +201,24 @@ async def generate_recommendation_summary(selected_courses, user_input: str, pre
         total_credits = sum(c.get("credits", 0) for c in selected_courses)
         avg_rating = sum(c["rating"] for c in selected_courses) / len(selected_courses) if selected_courses else 0
         
+        # 获取用户的硬性约束
+        exact_courses = preferences.get("exactCourses")
+        avoid_evening = preferences.get("timeConstraints", {}).get("avoidEvening", False)
+        exact_credits = preferences.get("exactCredits")
+        
+        constraint_desc = ""
+        if exact_courses:
+            constraint_desc += f"严格限定{exact_courses}门课程"
+        if avoid_evening:
+            constraint_desc += "，避开所有晚课"
+        if exact_credits:
+            constraint_desc += f"，确保{exact_credits}学分"
+        
         prompt = f"""你以「课神」的身份，为用户生成选课推荐总结。
 
 用户原始需求："{user_input}"
+
+硬性约束：{constraint_desc}
 
 已推荐课程（共{len(selected_courses)}门，{total_credits}学分）：
 {json.dumps(courses_info, ensure_ascii=False, indent=2)}
@@ -157,20 +227,15 @@ async def generate_recommendation_summary(selected_courses, user_input: str, pre
 
 请用课神的口吻生成一段推荐总结，要求：
 1. 以"本神"自称
-2. 体现高瞻远瞩的思考（如课程之间的搭配、学期整体规划）
-3. 点出这个课表的核心优势和可能的注意事项
+2. 说明你如何严格遵守了用户的硬性约束（课程数量、时间限制、学分要求）
+3. 点出这个课表在满足硬性约束前提下的优势
 4. 语言风格睿智、自信、略带幽默
 5. 不使用Markdown格式符号
-
-示例风格：
-- "本神观你骨骼清奇，这套课表正合你意..."
-- "高瞻远瞩地看，这套组合进可攻退可守..."
-- "本神掐指一算，这学期你将..."
 
 请直接输出推荐语："""
         
         messages = [
-            {"role": "system", "content": "你是课神，一位高瞻远瞩、睿智通透的选课智囊。"},
+            {"role": "system", "content": "你是课神，一位高瞻远瞩、睿智通透的选课智囊。你严格遵守用户的硬性约束。"},
             {"role": "user", "content": prompt}
         ]
         
@@ -183,40 +248,40 @@ async def generate_recommendation_summary(selected_courses, user_input: str, pre
     except Exception as e:
         print(f"生成总结错误: {e}")
         # Fallback to a default 课神-style message
-        return "本神已为你精心搭配了这套课表，各门课程相辅相成，既能满足学分要求，又能保证学习质量。愿你在新学期学有所成！"
+        return "本神已严格遵循你的要求，为你精心搭配了这套课表。各门课程符合你的时间和数量要求，愿你在新学期学有所成！"
 
 async def generate_thinking_process(preferences: Dict) -> str:
     """Generate 课神's thinking process for display"""
     thinking_steps = []
     
-    # Analyze constraints
-    if preferences.get("exactCredits"):
-        thinking_steps.append(f"首先，本神注意到你要求恰好修满 {preferences['exactCredits']} 学分，这是硬性约束，必须优先满足。")
-    elif preferences.get("minCredits"):
-        thinking_steps.append(f"首先，本神注意到你要求至少修满 {preferences['minCredits']} 学分，这是选课的前提。")
+    # 首先强调硬性约束
+    has_constraint = False
     
-    if preferences.get("exactCourses"):
-        thinking_steps.append(f"其次，你指定了要选 {preferences['exactCourses']} 门课，本神会严格遵循。")
-    elif preferences.get("minCourses"):
-        thinking_steps.append(f"其次，你要求至少选 {preferences['minCourses']} 门课，这是最低门槛。")
+    exact_courses = preferences.get("exactCourses")
+    if exact_courses:
+        thinking_steps.append(f"【硬性约束】检测到你要求恰好选 {exact_courses} 门课，本神将严格遵守，绝不多选。")
+        has_constraint = True
+    elif preferences.get("maxCourses") and preferences.get("maxCourses") < 8:
+        thinking_steps.append(f"【硬性约束】检测到你最多选 {preferences['maxCourses']} 门课，本神将严格控制数量。")
+        has_constraint = True
     
-    # Analyze interests
+    exact_credits = preferences.get("exactCredits")
+    if exact_credits:
+        thinking_steps.append(f"【硬性约束】检测到你要求恰好修满 {exact_credits} 学分，本神将精确匹配。")
+        has_constraint = True
+    
+    avoid_evening = preferences.get("timeConstraints", {}).get("avoidEvening", False)
+    if avoid_evening:
+        thinking_steps.append(f"【硬性约束】检测到你明确要求避开晚课，本神将过滤所有晚间课程。")
+        has_constraint = True
+    
+    if not has_constraint:
+        thinking_steps.append("本神正在分析你的选课需求...")
+    
+    # 分析其他偏好
     if preferences.get("interests"):
         interests_str = "、".join(preferences["interests"])
-        thinking_steps.append(f"在课程方向上，你对 {interests_str} 感兴趣，本神会优先考虑相关课程。")
-    
-    # Analyze time constraints
-    if preferences.get("timeConstraints"):
-        tc = preferences["timeConstraints"]
-        if tc.get("avoidEvening"):
-            thinking_steps.append("关于时间，你希望避开晚课，本神理解你需要充足的休息。")
-        if tc.get("preferredTimeRanges"):
-            thinking_steps.append("你有特定的时间段偏好，本神会据此筛选课程。")
-    
-    # Analyze priorities
-    if preferences.get("priorities"):
-        priorities_str = "、".join(preferences["priorities"])
-        thinking_steps.append(f"最后，你的优先考虑因素是：{priorities_str}，本神已记在心中。")
+        thinking_steps.append(f"在软性偏好上，你对 {interests_str} 感兴趣。")
     
     thinking_steps.append("本神正在综合以上所有条件，为你生成最优课表...")
     
