@@ -128,9 +128,9 @@ def check_final_constraints(selected_courses, preferences):
             return False, f"课程数不足：已选{count}门，要求至少{min_courses}门"
     
     # Check max courses - STRICT
-    max_courses = preferences.get("maxCourses", 8)
+    max_courses = preferences.get("maxCourses") or 8  # Handle None
     count = calculate_course_count(selected_courses)
-    if count > max_courses:
+    if max_courses and count > max_courses:
         return False, f"课程数超限：已选{count}门，上限{max_courses}门"
     
     # Check exact credits
@@ -207,9 +207,9 @@ def generate_optimal_schedule(available_courses, preferences=None):
     if preferences is None:
         preferences = {}
     
-    # Extract hard constraints
+    # Extract hard constraints - handle None values properly
     exact_courses = preferences.get("exactCourses")
-    max_courses = preferences.get("maxCourses", 8)
+    max_courses = preferences.get("maxCourses") or 8  # Use or to handle None
     min_courses = preferences.get("minCourses")
     
     exact_credits = preferences.get("exactCredits")
@@ -221,10 +221,8 @@ def generate_optimal_schedule(available_courses, preferences=None):
     # Determine target course count
     if exact_courses is not None:
         target_courses = exact_courses
-    elif max_courses:
-        target_courses = max_courses
     else:
-        target_courses = 6
+        target_courses = max_courses
     
     # Filter courses that match hard constraints
     valid_courses = []
