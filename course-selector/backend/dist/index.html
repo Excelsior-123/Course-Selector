@@ -3,30 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#3b82f6">
-    <meta name="description" content="智能选课助手 - 基于AI的大学生选课推荐系统">
-    <title>智能选课助手</title>
+    <meta name="theme-color" content="#8b5cf6">
+    <meta name="description" content="课神 - 高瞻远瞩的选课智囊，基于AI的大学生选课推荐系统">
+    <title>课神 - 高瞻远瞩的选课智囊</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
             min-height: 100vh;
         }
+        .title-font {
+            font-family: 'Noto Serif SC', serif;
+        }
         .glass {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
         .glass-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.97);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -34,41 +37,61 @@
         }
         .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
         }
-        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.7), 0 0 60px rgba(236, 72, 153, 0.4); }
+        }
+        .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-        .animate-spin-custom {
-            animation: spin 1s linear infinite;
+        .animate-spin-custom { animation: spin 1s linear infinite; }
+        @keyframes thinking {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
-        .course-cs { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
-        .course-math { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
-        .course-pe { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
-        .course-art { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-        .course-default { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .thinking-dot { animation: thinking 1.4s ease-in-out infinite; }
+        .thinking-dot:nth-child(2) { animation-delay: 0.2s; }
+        .thinking-dot:nth-child(3) { animation-delay: 0.4s; }
+        .course-cs { background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); }
+        .course-math { background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); }
+        .course-pe { background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%); }
+        .course-art { background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); }
+        .course-default { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); }
+        .keshen-badge {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            box-shadow: 0 2px 8px rgba(251, 191, 36, 0.4);
+        }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); }
         ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 3px; }
         .star-filled { color: #fbbf24; fill: #fbbf24; }
         .star-empty { color: #d1d5db; }
+        .thinking-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(236, 72, 153, 0.1) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
     </style>
 </head>
 <body class="pb-20">
     <!-- Header -->
     <header class="glass sticky top-0 z-50">
         <div class="max-w-4xl mx-auto px-4 py-4">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center animate-float">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                    </svg>
+            <div class="flex items-center gap-4">
+                <!-- 课神 Logo -->
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 via-purple-500 to-indigo-600 flex items-center justify-center animate-float animate-pulse-glow">
+                    <span class="text-xl font-bold text-white title-font">神</span>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold text-white">智能选课助手</h1>
-                    <p class="text-xs text-white/70">AI-powered Course Selection</p>
+                    <h1 class="text-xl font-bold text-white title-font tracking-wide">课神</h1>
+                    <p class="text-xs text-white/70">高瞻远瞩的选课智囊</p>
+                </div>
+                <div class="ml-auto flex items-center gap-2">
+                    <span class="keshen-badge text-xs px-2 py-1 rounded-full text-white font-medium">AI 加持</span>
                 </div>
             </div>
         </div>
@@ -76,37 +99,45 @@
 
     <!-- Main Content -->
     <main class="max-w-4xl mx-auto px-4 pt-6">
+        <!-- 课神引言 -->
+        <div class="text-center mb-6">
+            <p class="text-white/80 text-sm italic">"本神观星象、察课程，为你指点选课迷津"</p>
+        </div>
+
         <!-- Input Section -->
         <div class="glass-card rounded-2xl p-5">
             <form id="inputForm">
                 <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">描述你的选课需求</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+                        <span class="text-purple-600">📜</span>
+                        向本神诉说你的选课需求
+                    </label>
                     <textarea
                         id="userInput"
-                        placeholder="例如：我对计算机网络感兴趣，希望上午9点到下午6点上课，考核简单作业少给分高；同时想选篮球课，周二到周四晚上..."
-                        class="w-full h-32 p-4 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 resize-none text-gray-700 placeholder-gray-400 transition-all"
+                        placeholder="例如：本神想修满20学分，对计算机网络和人工智能感兴趣，希望上午9点到下午6点上课，考核简单作业少给分高；同时想选一门体育课..."
+                        class="w-full h-32 p-4 rounded-xl border border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 resize-none text-gray-700 placeholder-gray-400 transition-all"
                     ></textarea>
                 </div>
                 
                 <button
                     type="submit"
                     id="submitBtn"
-                    class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all flex items-center justify-center gap-2"
+                    class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 text-white font-semibold shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40 transition-all flex items-center justify-center gap-2"
                 >
                     <svg id="btnIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                     </svg>
-                    <span id="btnText">生成推荐方案</span>
+                    <span id="btnText">求神指点</span>
                 </button>
             </form>
             
             <div class="mt-4 flex flex-wrap gap-2">
-                <span class="text-xs text-gray-500">热门标签：</span>
-                <button onclick="addTag('水课推荐')" class="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors">#水课推荐</button>
-                <button onclick="addTag('给分高')" class="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors">#给分高</button>
-                <button onclick="addTag('专业课')" class="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors">#专业课</button>
-                <button onclick="addTag('体育课')" class="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors">#体育课</button>
-                <button onclick="addTag('通识课')" class="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors">#通识课</button>
+                <span class="text-xs text-gray-500">热门诉求：</span>
+                <button onclick="addTag('修满20学分')" class="text-xs px-2 py-1 rounded-full bg-purple-50 text-purple-600 hover:bg-purple-100 transition-colors">#修满20学分</button>
+                <button onclick="addTag('给分高的水课')" class="text-xs px-2 py-1 rounded-full bg-purple-50 text-purple-600 hover:bg-purple-100 transition-colors">#给分高的水课</button>
+                <button onclick="addTag('不选晚课')" class="text-xs px-2 py-1 rounded-full bg-purple-50 text-purple-600 hover:bg-purple-100 transition-colors">#不选晚课</button>
+                <button onclick="addTag('想选5门课')" class="text-xs px-2 py-1 rounded-full bg-purple-50 text-purple-600 hover:bg-purple-100 transition-colors">#想选5门课</button>
+                <button onclick="addTag('AI相关')" class="text-xs px-2 py-1 rounded-full bg-purple-50 text-purple-600 hover:bg-purple-100 transition-colors">#AI相关</button>
             </div>
         </div>
 
@@ -120,42 +151,41 @@
             </div>
         </div>
 
-        <!-- Loading State -->
-        <div id="loadingState" class="hidden mt-6 glass-card rounded-2xl p-8">
-            <div class="flex flex-col items-center justify-center py-8">
-                <div class="relative">
-                    <div class="w-20 h-20 rounded-full border-4 border-blue-200 animate-pulse"></div>
-                    <div class="absolute inset-0 w-20 h-20 rounded-full border-4 border-transparent border-t-blue-500 animate-spin-custom"></div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                        </svg>
+        <!-- Loading State with 课神 Thinking -->
+        <div id="loadingState" class="hidden mt-6 glass-card rounded-2xl p-6">
+            <div class="flex flex-col items-center justify-center py-6">
+                <!-- 课神头像 -->
+                <div class="relative mb-6">
+                    <div class="w-24 h-24 rounded-full bg-gradient-to-br from-amber-400 via-purple-500 to-indigo-600 flex items-center justify-center animate-pulse-glow">
+                        <span class="text-4xl font-bold text-white title-font">神</span>
+                    </div>
+                    <div class="absolute -bottom-1 -right-1 w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                        <div class="flex gap-0.5">
+                            <div class="w-1 h-1 bg-white rounded-full thinking-dot"></div>
+                            <div class="w-1 h-1 bg-white rounded-full thinking-dot"></div>
+                            <div class="w-1 h-1 bg-white rounded-full thinking-dot"></div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="mt-6 text-center">
-                    <h3 class="text-lg font-semibold text-gray-800">AI正在分析您的需求...</h3>
-                    <div class="mt-4 space-y-2">
-                        <div class="flex items-center gap-3 text-sm text-gray-600">
-                            <div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center">
-                                <svg class="w-3 h-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                </svg>
-                            </div>
-                            <span>解析选课偏好</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-sm text-gray-600">
-                            <div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center">
-                                <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                            </div>
-                            <span>筛选匹配课程</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-sm text-gray-400">
-                            <div class="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center">
-                                <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
-                            </div>
-                            <span>生成最优课表</span>
-                        </div>
+                <div class="text-center">
+                    <h3 class="text-lg font-semibold text-gray-800 title-font">课神正在深度推演...</h3>
+                    <p class="text-sm text-gray-500 mt-1">高瞻远瞩，运筹帷幄</p>
+                </div>
+                
+                <!-- 思考过程 -->
+                <div id="thinkingProcess" class="mt-4 w-full space-y-2">
+                    <div class="thinking-card rounded-lg p-3 text-sm text-gray-600 flex items-center gap-2">
+                        <span class="text-purple-500">🔮</span>
+                        <span>解析你的学分与课程数要求...</span>
+                    </div>
+                    <div class="thinking-card rounded-lg p-3 text-sm text-gray-600 flex items-center gap-2">
+                        <span class="text-purple-500">⚖️</span>
+                        <span>评估各门课程的给分与难度...</span>
+                    </div>
+                    <div class="thinking-card rounded-lg p-3 text-sm text-gray-600 flex items-center gap-2">
+                        <span class="text-purple-500">🎯</span>
+                        <span>推演最优课表组合...</span>
                     </div>
                 </div>
             </div>
@@ -166,19 +196,17 @@
 
         <!-- Empty State -->
         <div id="emptyState" class="mt-12 text-center">
-            <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-white/20 backdrop-blur flex items-center justify-center">
-                <svg class="w-12 h-12 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
-                </svg>
+            <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-white/10 backdrop-blur flex items-center justify-center animate-float">
+                <span class="text-5xl title-font text-white/60">神</span>
             </div>
-            <h3 class="text-xl font-semibold text-white mb-2">开始智能选课</h3>
-            <p class="text-white/70 max-w-md mx-auto">用自然语言描述你的选课需求，例如："我对计算机网络感兴趣，希望上午上课，同时选一门给分高的体育课"</p>
+            <h3 class="text-xl font-semibold text-white mb-2 title-font">课神已就位</h3>
+            <p class="text-white/70 max-w-md mx-auto">向本神诉说你的选课需求，无论是学分规划、时间偏好，还是"水课"秘诀，本神都能为你指点迷津</p>
             
             <div class="mt-8 flex flex-wrap justify-center gap-3">
-                <button onclick="submitExample('想选给分高的水课')" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white/80 text-sm transition-all">想选给分高的水课</button>
-                <button onclick="submitExample('周二周四晚上有课')" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white/80 text-sm transition-all">周二周四晚上有课</button>
-                <button onclick="submitExample('AI相关课程')" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white/80 text-sm transition-all">AI相关课程</button>
-                <button onclick="submitExample('作业少好拿A')" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white/80 text-sm transition-all">作业少好拿A</button>
+                <button onclick="submitExample('想修满20学分，给分高的课')" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white/80 text-sm transition-all">想修满20学分</button>
+                <button onclick="submitExample('选4门课，不选晚课')" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white/80 text-sm transition-all">选4门课，不选晚课</button>
+                <button onclick="submitExample('AI相关课程，作业少')" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white/80 text-sm transition-all">AI相关课程</button>
+                <button onclick="submitExample('给我推荐水课，给分高的')" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white/80 text-sm transition-all">推荐水课</button>
             </div>
         </div>
     </main>
@@ -230,6 +258,13 @@
 
         function getWorkloadText(workload) {
             return ['极少', '较少', '适中', '较多', '极多'][workload - 1] || workload;
+        }
+
+        function getKeshenRating(rating) {
+            if (rating >= 9.8) return { text: '神级推荐', emoji: '👑', color: 'from-amber-400 to-yellow-500' };
+            if (rating >= 9.5) return { text: '强烈推荐', emoji: '⭐', color: 'from-purple-500 to-pink-500' };
+            if (rating >= 9.0) return { text: '值得一选', emoji: '✨', color: 'from-blue-500 to-purple-500' };
+            return { text: '中规中矩', emoji: '📚', color: 'from-gray-400 to-gray-500' };
         }
 
         function renderScheduleGrid(grid) {
@@ -284,21 +319,29 @@
         }
 
         function renderCourseList(courses) {
-            return courses.map((course, index) => `
+            return courses.map((course, index) => {
+                const keshen = getKeshenRating(course.rating);
+                return `
                 <div class="rounded-xl border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow">
                     <div class="p-4 bg-white cursor-pointer" onclick="toggleCourseDetail('${course.id}')">
                         <div class="flex justify-between items-start">
                             <div class="flex-1">
-                                <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-2 flex-wrap">
                                     <h3 class="text-lg font-bold text-gray-800">${course.name}</h3>
                                     <span class="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">${course.code}</span>
+                                    <!-- 课神评级 -->
+                                    <span class="text-xs px-2 py-0.5 rounded-full bg-gradient-to-r ${keshen.color} text-white font-medium flex items-center gap-1">
+                                        <span>${keshen.emoji}</span>
+                                        <span>${keshen.text}</span>
+                                    </span>
                                 </div>
                                 <p class="text-sm text-gray-500 mt-1">${course.department} · ${course.instructor}</p>
                                 
-                                <div class="flex items-center gap-4 mt-3">
+                                <div class="flex items-center gap-4 mt-3 flex-wrap">
                                     <div class="flex items-center gap-1">${renderStars(course.rating)}<span class="text-sm text-gray-600 ml-1">${course.rating}</span></div>
                                     <div class="text-xs px-2 py-1 rounded-full ${getWorkloadClass(course.workload)}">工作量: ${getWorkloadText(course.workload)}</div>
                                     <div class="text-sm font-medium ${getDifficultyColor(course.difficulty)}">难度: ${course.difficulty.toFixed(1)}</div>
+                                    <div class="text-xs px-2 py-1 rounded-full bg-indigo-50 text-indigo-600">${course.credits}学分</div>
                                 </div>
                             </div>
                             
@@ -308,14 +351,14 @@
                         </div>
                         
                         <div class="flex flex-wrap gap-2 mt-3">
-                            ${course.tags.map(tag => `<span class="text-xs px-2 py-1 rounded-full bg-blue-50 text-blue-600">${tag}</span>`).join('')}
+                            ${course.tags.map(tag => `<span class="text-xs px-2 py-1 rounded-full bg-purple-50 text-purple-600">${tag}</span>`).join('')}
                         </div>
                     </div>
                     
                     <div id="detail-${course.id}" class="hidden px-4 pb-4 bg-gray-50 border-t border-gray-100">
                         <div class="pt-4 space-y-4">
                             <div>
-                                <h4 class="text-sm font-semibold text-gray-700 mb-2">课程时间</h4>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-2">📅 课程时间</h4>
                                 ${course.schedule.map(slot => `
                                     <div class="text-sm text-gray-600 flex items-center gap-2">
                                         <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -324,15 +367,16 @@
                                         周${['一','二','三','四','五','六','日'][slot.day-1]} ${slot.startTime}-${slot.endTime} · ${slot.location}
                                     </div>
                                 `).join('')}
+                                ${course.frequency ? `<div class="text-xs text-gray-500 mt-1">开课频次: ${course.frequency}</div>` : ''}
                             </div>
                             
                             <div>
-                                <h4 class="text-sm font-semibold text-gray-700 mb-1">课程简介</h4>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-1">📝 课程简介</h4>
                                 <p class="text-sm text-gray-600">${course.description}</p>
                             </div>
                             
                             <div>
-                                <h4 class="text-sm font-semibold text-gray-700 mb-2">成绩分布</h4>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-2">📊 成绩分布预估</h4>
                                 <div class="flex h-6 rounded-lg overflow-hidden">
                                     <div class="bg-green-400 flex items-center justify-center text-xs text-white" style="width: ${course.gradeDistribution.A}%">${course.gradeDistribution.A >= 15 ? 'A ' + course.gradeDistribution.A + '%' : ''}</div>
                                     <div class="bg-blue-400 flex items-center justify-center text-xs text-white" style="width: ${course.gradeDistribution.B}%">${course.gradeDistribution.B >= 15 ? 'B ' + course.gradeDistribution.B + '%' : ''}</div>
@@ -348,7 +392,7 @@
                             </div>
                             
                             <div>
-                                <h4 class="text-sm font-semibold text-gray-700 mb-2">学生评价</h4>
+                                <h4 class="text-sm font-semibold text-gray-700 mb-2">💬 学子评价</h4>
                                 <div class="space-y-2">
                                     ${course.reviews.slice(0, 3).map(review => `
                                         <div class="bg-white p-3 rounded-lg border border-gray-100">
@@ -364,7 +408,7 @@
                         </div>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         function toggleCourseDetail(courseId) {
@@ -382,37 +426,46 @@
         function renderResults(data) {
             const container = document.getElementById('resultsContainer');
             const stats = data.schedule.stats;
+            const summary = data.summary;
             
             container.innerHTML = `
                 <div class="mt-6 space-y-6 animate-fade-in">
-                    <!-- AI Summary -->
-                    <div class="glass-card rounded-2xl p-5">
-                        <div class="flex items-center gap-2 mb-3">
-                            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center">
-                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                                </svg>
-                            </div>
-                            <h2 class="text-lg font-bold text-gray-800">AI 推荐总结</h2>
-                        </div>
-                        <p class="text-gray-600 leading-relaxed">${data.summary}</p>
+                    <!-- 课神推荐总结 -->
+                    <div class="glass-card rounded-2xl p-5 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-200 to-pink-200 rounded-full blur-3xl opacity-50"></div>
                         
-                        <div class="mt-4 grid grid-cols-4 gap-3">
-                            <div class="text-center p-3 bg-blue-50 rounded-xl">
-                                <p class="text-2xl font-bold text-blue-600">${stats.courseCount}</p>
-                                <p class="text-xs text-gray-500">门课程</p>
+                        <div class="relative">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-purple-500 flex items-center justify-center">
+                                    <span class="text-lg font-bold text-white title-font">神</span>
+                                </div>
+                                <div>
+                                    <h2 class="text-lg font-bold text-gray-800 title-font">课神荐言</h2>
+                                    <p class="text-xs text-purple-600">高瞻远瞩之选</p>
+                                </div>
                             </div>
-                            <div class="text-center p-3 bg-purple-50 rounded-xl">
-                                <p class="text-2xl font-bold text-purple-600">${stats.totalCredits}</p>
-                                <p class="text-xs text-gray-500">总学分</p>
+                            
+                            <div class="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-4 border border-purple-100">
+                                <p class="text-gray-700 leading-relaxed italic">"${summary}"</p>
                             </div>
-                            <div class="text-center p-3 bg-green-50 rounded-xl">
-                                <p class="text-2xl font-bold text-green-600">${stats.averageRating.toFixed(1)}</p>
-                                <p class="text-xs text-gray-500">平均评分</p>
-                            </div>
-                            <div class="text-center p-3 bg-orange-50 rounded-xl">
-                                <p class="text-2xl font-bold text-orange-600">${stats.averageDifficulty.toFixed(1)}</p>
-                                <p class="text-xs text-gray-500">平均难度</p>
+                            
+                            <div class="mt-4 grid grid-cols-4 gap-3">
+                                <div class="text-center p-3 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
+                                    <p class="text-2xl font-bold text-purple-600">${stats.courseCount}</p>
+                                    <p class="text-xs text-gray-500">门课程</p>
+                                </div>
+                                <div class="text-center p-3 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl">
+                                    <p class="text-2xl font-bold text-indigo-600">${stats.totalCredits}</p>
+                                    <p class="text-xs text-gray-500">总学分</p>
+                                </div>
+                                <div class="text-center p-3 bg-gradient-to-br from-amber-50 to-amber-100 rounded-xl">
+                                    <p class="text-2xl font-bold text-amber-600">${stats.averageRating.toFixed(1)}</p>
+                                    <p class="text-xs text-gray-500">平均评分</p>
+                                </div>
+                                <div class="text-center p-3 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl">
+                                    <p class="text-2xl font-bold text-pink-600">${stats.averageDifficulty.toFixed(1)}</p>
+                                    <p class="text-xs text-gray-500">平均难度</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -433,12 +486,12 @@
                     <!-- Course List -->
                     <div class="glass-card rounded-2xl p-5">
                         <div class="flex items-center gap-2 mb-4">
-                            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center">
+                            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center">
                                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
                                 </svg>
                             </div>
-                            <h2 class="text-lg font-bold text-gray-800">推荐课程</h2>
+                            <h2 class="text-lg font-bold text-gray-800">神选课程</h2>
                             <span class="text-sm text-gray-500">共 ${data.schedule.courses.length} 门</span>
                         </div>
                         <div class="space-y-4">
@@ -463,7 +516,7 @@
             
             // Update button state
             document.getElementById('submitBtn').disabled = true;
-            document.getElementById('btnText').textContent = '分析中...';
+            document.getElementById('btnText').textContent = '推演中...';
             
             try {
                 const response = await fetch(`${API_URL}/recommend`, {
@@ -477,16 +530,16 @@
                 if (result.success) {
                     renderResults(result.data);
                 } else {
-                    throw new Error(result.error || '获取推荐失败');
+                    throw new Error(result.error || '课神推演失败');
                 }
             } catch (err) {
-                document.getElementById('errorText').textContent = err.message || '网络错误，请稍后重试';
+                document.getElementById('errorText').textContent = err.message || '网络不畅，请稍后重试';
                 document.getElementById('errorMessage').classList.remove('hidden');
                 document.getElementById('emptyState').classList.remove('hidden');
             } finally {
                 document.getElementById('loadingState').classList.add('hidden');
                 document.getElementById('submitBtn').disabled = false;
-                document.getElementById('btnText').textContent = '生成推荐方案';
+                document.getElementById('btnText').textContent = '求神指点';
             }
         });
     </script>

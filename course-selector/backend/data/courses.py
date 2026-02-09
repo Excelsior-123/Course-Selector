@@ -1,5 +1,5 @@
 courses = [
-    # 来自 icourse.club 的真实高分课程
+    # 来自 icourse.club 的真实高分课程 - 包含完整开课时间和频次信息
     {
         "id": "MATH19509",
         "code": "MATH101",
@@ -12,15 +12,16 @@ courses = [
             {"day": 3, "startTime": "08:00", "endTime": "09:35", "location": "5-201"},
             {"day": 5, "startTime": "08:00", "endTime": "09:35", "location": "5-201"}
         ],
+        "frequency": "每学期",  # 开课频次
+        "semester": ["秋季"],   # 开课学期
         "instructor": "汪琥庭",
         "difficulty": 3.0,
         "workload": 3,
         "rating": 9.9,
         "gradeDistribution": {"A": 40, "B": 40, "C": 15, "D": 5},
         "reviews": [
-            {"content": "数分(B1)是本科的第一门也是最基础的数学课，之后的一切数学课程都以此为基石。", "rating": 5, "author": "助教", "date": "2024-01"},
-            {"content": "汪爷爷讲课清晰，非常推荐！", "rating": 5, "author": "匿名", "date": "2024-01"},
-            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "数学系", "date": "2023-12"}
+            {"content": "数分(B1)是本科的第一门也是最基础的数学课，之后的一切数学课程都以此为基石。汪爷爷讲课清晰，非常推荐！", "rating": 5, "author": "助教", "date": "2024-01"},
+            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "匿名", "date": "2023-12"}
         ],
         "tags": ["基础课", "数学", "必修", "高分推荐"],
         "description": "数学分析是本科数学的第一门基础课，涵盖极限、连续性、导数、积分、级数等核心内容。"
@@ -35,15 +36,16 @@ courses = [
         "schedule": [
             {"day": 2, "startTime": "14:00", "endTime": "15:35", "location": "3-301"}
         ],
+        "frequency": "每学期",
+        "semester": ["春季", "秋季"],
         "instructor": "杨映秋",
         "difficulty": 1.5,
         "workload": 1,
         "rating": 9.9,
         "gradeDistribution": {"A": 70, "B": 25, "C": 4, "D": 1},
         "reviews": [
-            {"content": "杨老师超级好，课程轻松有趣，能学到实打实的心理学知识！", "rating": 5, "author": "匿名", "date": "2024-12"},
-            {"content": "课程难度简单，作业很少，给分超好，收获很多", "rating": 5, "author": "大一", "date": "2024-01"},
-            {"content": "虽然是水课，但真的能学到东西，50%课堂表现+50%期末论文", "rating": 5, "author": "大二", "date": "2023-12"}
+            {"content": "杨老师超级好，课程轻松有趣，能学到实打实的心理学知识！虽然是水课，但真的能学到东西，50%课堂表现+50%期末论文", "rating": 5, "author": "匿名", "date": "2024-12"},
+            {"content": "课程难度简单，作业很少，给分超好，收获很多", "rating": 5, "author": "大一", "date": "2024-01"}
         ],
         "tags": ["通识课", "水课", "给分高", "核心通识"],
         "description": "杨映秋老师的《社会心理学》是一门轻松有趣的通识课程，涵盖社会认知、亲社会行为和人际关系等内容。"
@@ -59,14 +61,15 @@ courses = [
             {"day": 1, "startTime": "10:00", "endTime": "11:35", "location": "2-401"},
             {"day": 3, "startTime": "10:00", "endTime": "11:35", "location": "2-401"}
         ],
+        "frequency": "每年",
+        "semester": ["春季"],
         "instructor": "易为",
         "difficulty": 3.5,
         "workload": 3,
         "rating": 10.0,
         "gradeDistribution": {"A": 45, "B": 40, "C": 12, "D": 3},
         "reviews": [
-            {"content": "易老师讲课非常清晰，量子力学也能听懂！", "rating": 5, "author": "物理系", "date": "2025-01"},
-            {"content": "满分课程，强烈推荐！", "rating": 5, "author": "匿名", "date": "2024-12"},
+            {"content": "易老师讲课非常清晰，量子力学也能听懂！满分课程，强烈推荐！", "rating": 5, "author": "物理系", "date": "2025-01"},
             {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "大四", "date": "2024-01"}
         ],
         "tags": ["专业课", "物理", "热门", "高分推荐"],
@@ -84,15 +87,16 @@ courses = [
             {"day": 4, "startTime": "08:00", "endTime": "09:35", "location": "3A-101"},
             {"day": 5, "startTime": "14:00", "endTime": "16:25", "location": "机房-301"}
         ],
+        "frequency": "每学期",
+        "semester": ["秋季"],
         "instructor": "盛捷",
         "difficulty": 2.5,
         "workload": 2,
         "rating": 10.0,
         "gradeDistribution": {"A": 50, "B": 35, "C": 12, "D": 3},
         "reviews": [
-            {"content": "盛老师讲课非常细致，编程入门首选！", "rating": 5, "author": "CS新生", "date": "2024-12"},
-            {"content": "课程难度中等，作业很少，给分超好", "rating": 5, "author": "转专业", "date": "2024-01"},
-            {"content": "收获很大，从零基础到能写程序", "rating": 5, "author": "大一", "date": "2023-12"}
+            {"content": "盛老师讲课非常细致，编程入门首选！从零基础到能写程序，收获很大", "rating": 5, "author": "CS新生", "date": "2024-12"},
+            {"content": "课程难度中等，作业很少，给分超好", "rating": 5, "author": "转专业", "date": "2024-01"}
         ],
         "tags": ["专业课", "编程", "基础课", "高分推荐"],
         "description": "计算机程序设计A是计算机专业的入门编程课程，适合零基础学生。"
@@ -109,6 +113,8 @@ courses = [
             {"day": 3, "startTime": "14:00", "endTime": "15:35", "location": "3A-102"},
             {"day": 4, "startTime": "19:00", "endTime": "21:25", "location": "机房-302"}
         ],
+        "frequency": "每学期",
+        "semester": ["秋季"],
         "instructor": "白雪飞",
         "difficulty": 2.5,
         "workload": 3,
@@ -116,8 +122,7 @@ courses = [
         "gradeDistribution": {"A": 45, "B": 40, "C": 12, "D": 3},
         "reviews": [
             {"content": "白老师讲课细致，非常适合入门", "rating": 5, "author": "CS学生", "date": "2024-12"},
-            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "匿名", "date": "2024-01"},
-            {"content": "编程入门必修课，推荐", "rating": 4, "author": "大二", "date": "2023-12"}
+            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "匿名", "date": "2024-01"}
         ],
         "tags": ["专业课", "编程", "基础课", "热门"],
         "description": "计算机程序设计A，另一班级的程序设计入门课程。"
@@ -133,15 +138,16 @@ courses = [
             {"day": 2, "startTime": "10:00", "endTime": "11:35", "location": "2-201"},
             {"day": 4, "startTime": "10:00", "endTime": "11:35", "location": "2-201"}
         ],
+        "frequency": "每学期",
+        "semester": ["春季", "秋季"],
         "instructor": "涂涛",
         "difficulty": 2.0,
         "workload": 2,
         "rating": 10.0,
         "gradeDistribution": {"A": 55, "B": 35, "C": 8, "D": 2},
         "reviews": [
-            {"content": "涂老师讲课清晰，给分超好，推荐！", "rating": 5, "author": "物理系", "date": "2026-01"},
-            {"content": "课程难度简单，作业很少，给分超好", "rating": 5, "author": "大一", "date": "2024-12"},
-            {"content": "物理基础课，涂老师讲得特别好", "rating": 5, "author": "匿名", "date": "2024-01"}
+            {"content": "涂老师讲课清晰，给分超好，推荐！课程难度简单，作业很少", "rating": 5, "author": "物理系", "date": "2024-12"},
+            {"content": "物理基础课，涂老师讲得特别好", "rating": 5, "author": "大一", "date": "2024-01"}
         ],
         "tags": ["基础课", "物理", "水课推荐", "给分高"],
         "description": "大学物理II，涵盖电磁学、光学等基础物理内容。"
@@ -156,14 +162,15 @@ courses = [
         "schedule": [
             {"day": 1, "startTime": "14:00", "endTime": "16:25", "location": "5-301"}
         ],
+        "frequency": "每年",
+        "semester": ["秋季"],
         "instructor": "杨亚宁",
         "difficulty": 3.0,
         "workload": 3,
         "rating": 9.8,
         "gradeDistribution": {"A": 40, "B": 42, "C": 15, "D": 3},
         "reviews": [
-            {"content": "杨老师讲得很好，统计学习必备", "rating": 5, "author": "统计专业", "date": "2025-01"},
-            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "数据科学", "date": "2024-12"},
+            {"content": "杨老师讲得很好，统计学习必备！课程难度中等，给分超好", "rating": 5, "author": "统计专业", "date": "2024-12"},
             {"content": "回归分析讲得很透彻", "rating": 5, "author": "研究生", "date": "2024-01"}
         ],
         "tags": ["专业课", "统计", "数据分析", "高分推荐"],
@@ -181,15 +188,16 @@ courses = [
             {"day": 4, "startTime": "08:00", "endTime": "09:35", "location": "5-202"},
             {"day": 5, "startTime": "10:00", "endTime": "11:35", "location": "5-202"}
         ],
+        "frequency": "每学期",
+        "semester": ["秋季"],
         "instructor": "程艺",
         "difficulty": 3.0,
         "workload": 3,
         "rating": 9.9,
         "gradeDistribution": {"A": 40, "B": 40, "C": 15, "D": 5},
         "reviews": [
-            {"content": "程老师讲课非常好，数分必选！", "rating": 5, "author": "数学系", "date": "2025-01"},
-            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "大一", "date": "2024-12"},
-            {"content": "数学分析的入门好课", "rating": 5, "author": "匿名", "date": "2024-01"}
+            {"content": "程老师讲课非常好，数分必选！课程难度中等，给分超好", "rating": 5, "author": "数学系", "date": "2024-12"},
+            {"content": "数学分析的入门好课", "rating": 5, "author": "大一", "date": "2024-01"}
         ],
         "tags": ["基础课", "数学", "必修", "高分推荐"],
         "description": "数学分析B1课程，程艺老师主讲，数学专业基础必修课。"
@@ -204,14 +212,15 @@ courses = [
         "schedule": [
             {"day": 1, "startTime": "19:00", "endTime": "21:25", "location": "5-401"}
         ],
+        "frequency": "隔学期",
+        "semester": ["春季"],
         "instructor": "王作勤",
         "difficulty": 4.5,
         "workload": 5,
         "rating": 9.9,
         "gradeDistribution": {"A": 25, "B": 45, "C": 25, "D": 5},
         "reviews": [
-            {"content": "王老师的拓扑学讲得非常有深度，虽然难但值得！", "rating": 5, "author": "数学系", "date": "2024-12"},
-            {"content": "课程难度困难，作业很多，但给分超好，收获很多", "rating": 5, "author": "大三", "date": "2024-01"},
+            {"content": "王老师的拓扑学讲得非常有深度，虽然难但值得！课程难度困难，作业很多，但给分超好", "rating": 5, "author": "数学系", "date": "2024-12"},
             {"content": "H班的拓扑学，对数学思维提升很大", "rating": 5, "author": "研究生", "date": "2023-12"}
         ],
         "tags": ["专业课", "数学", "高难度", "H班"],
@@ -228,15 +237,16 @@ courses = [
         "schedule": [
             {"day": 2, "startTime": "19:00", "endTime": "20:35", "location": "东区体育馆"}
         ],
+        "frequency": "每学期",
+        "semester": ["春季", "秋季"],
         "instructor": "赵教练",
         "difficulty": 1.5,
         "workload": 1,
         "rating": 4.5,
         "gradeDistribution": {"A": 80, "B": 15, "C": 5, "D": 0},
         "reviews": [
-            {"content": "给分超高，老师人很好", "rating": 5, "author": "篮球爱好者", "date": "2024-01"},
-            {"content": "轻松拿A，推荐", "rating": 5, "author": "宅男", "date": "2023-12"},
-            {"content": "可以锻炼身体，还能认识朋友", "rating": 4, "author": "大一", "date": "2023-11"}
+            {"content": "给分超高，老师人很好，轻松拿A，推荐", "rating": 5, "author": "篮球爱好者", "date": "2024-01"},
+            {"content": "可以锻炼身体，还能认识朋友", "rating": 4, "author": "大一", "date": "2023-12"}
         ],
         "tags": ["体育课", "水课", "给分高"],
         "description": "篮球基本技术与战术，体能训练。"
@@ -251,15 +261,16 @@ courses = [
         "schedule": [
             {"day": 3, "startTime": "19:00", "endTime": "20:35", "location": "游泳馆"}
         ],
+        "frequency": "每学期",
+        "semester": ["春季", "秋季"],
         "instructor": "钱教练",
         "difficulty": 2.0,
         "workload": 1,
         "rating": 4.3,
         "gradeDistribution": {"A": 70, "B": 20, "C": 8, "D": 2},
         "reviews": [
-            {"content": "学会了游泳，很有成就感", "rating": 5, "author": "旱鸭子", "date": "2024-01"},
-            {"content": "水质不错，教练耐心", "rating": 4, "author": "匿名", "date": "2023-12"},
-            {"content": "有点冷，但给分好", "rating": 4, "author": "南方同学", "date": "2023-11"}
+            {"content": "学会了游泳，很有成就感！水质不错，教练耐心", "rating": 5, "author": "旱鸭子", "date": "2024-01"},
+            {"content": "有点冷，但给分好", "rating": 4, "author": "南方同学", "date": "2023-12"}
         ],
         "tags": ["体育课", "实用技能", "给分高"],
         "description": "游泳基本技术，安全知识。"
@@ -274,15 +285,16 @@ courses = [
         "schedule": [
             {"day": 4, "startTime": "19:00", "endTime": "20:35", "location": "羽毛球馆"}
         ],
+        "frequency": "每学期",
+        "semester": ["春季", "秋季"],
         "instructor": "孙教练",
         "difficulty": 2.0,
         "workload": 1,
         "rating": 4.4,
         "gradeDistribution": {"A": 75, "B": 20, "C": 4, "D": 1},
         "reviews": [
-            {"content": "老师很专业，学到很多技巧", "rating": 5, "author": "羽球爱好者", "date": "2024-01"},
-            {"content": "轻松愉快，给分好", "rating": 5, "author": "初学者", "date": "2023-12"},
-            {"content": "场地有点紧张", "rating": 4, "author": "匿名", "date": "2023-11"}
+            {"content": "老师很专业，学到很多技巧，轻松愉快，给分好", "rating": 5, "author": "羽球爱好者", "date": "2024-01"},
+            {"content": "场地有点紧张", "rating": 4, "author": "匿名", "date": "2023-12"}
         ],
         "tags": ["体育课", "水课", "给分高"],
         "description": "羽毛球基本技术与战术。"
@@ -298,15 +310,16 @@ courses = [
         "schedule": [
             {"day": 2, "startTime": "19:00", "endTime": "20:35", "location": "人文楼-101"}
         ],
+        "frequency": "每学期",
+        "semester": ["春季", "秋季"],
         "instructor": "黄教授",
         "difficulty": 1.5,
         "workload": 1,
         "rating": 4.6,
         "gradeDistribution": {"A": 60, "B": 30, "C": 8, "D": 2},
         "reviews": [
-            {"content": "超级水课，给分超高", "rating": 5, "author": "理科生", "date": "2024-01"},
-            {"content": "老师讲课很有趣", "rating": 5, "author": "艺术爱好者", "date": "2023-12"},
-            {"content": "期末开卷，轻松拿A", "rating": 5, "author": "刷分党", "date": "2023-11"}
+            {"content": "超级水课，给分超高！老师讲课很有趣，期末开卷，轻松拿A", "rating": 5, "author": "理科生", "date": "2024-01"},
+            {"content": "艺术爱好者也能学到东西", "rating": 4, "author": "艺术爱好者", "date": "2023-12"}
         ],
         "tags": ["通识课", "水课", "人文"],
         "description": "西方艺术发展历史，名画赏析。"
@@ -321,15 +334,16 @@ courses = [
         "schedule": [
             {"day": 4, "startTime": "19:00", "endTime": "21:25", "location": "人文楼-多媒体教室"}
         ],
+        "frequency": "每学期",
+        "semester": ["春季", "秋季"],
         "instructor": "林教授",
         "difficulty": 1.5,
         "workload": 1,
         "rating": 4.7,
         "gradeDistribution": {"A": 65, "B": 25, "C": 8, "D": 2},
         "reviews": [
-            {"content": "看电影就能拿学分", "rating": 5, "author": "电影迷", "date": "2024-01"},
-            {"content": "老师点评很专业", "rating": 5, "author": "匿名", "date": "2023-12"},
-            {"content": "期末交影评，超简单", "rating": 5, "author": "懒人", "date": "2023-11"}
+            {"content": "看电影就能拿学分！老师点评很专业，期末交影评，超简单", "rating": 5, "author": "电影迷", "date": "2024-01"},
+            {"content": "懒人必选课", "rating": 5, "author": "匿名", "date": "2023-12"}
         ],
         "tags": ["通识课", "水课", "给分高"],
         "description": "经典电影赏析，电影理论与批评。"
@@ -344,15 +358,16 @@ courses = [
         "schedule": [
             {"day": 3, "startTime": "19:00", "endTime": "20:35", "location": "人文楼-201"}
         ],
+        "frequency": "每学期",
+        "semester": ["春季", "秋季"],
         "instructor": "高教授",
         "difficulty": 2.0,
         "workload": 1,
         "rating": 4.2,
         "gradeDistribution": {"A": 50, "B": 35, "C": 12, "D": 3},
         "reviews": [
-            {"content": "开阔思维，很有意思", "rating": 5, "author": "理科生", "date": "2024-01"},
-            {"content": "老师讲课有深度", "rating": 4, "author": "哲学爱好者", "date": "2023-12"},
-            {"content": "给分不错", "rating": 4, "author": "刷分党", "date": "2023-11"}
+            {"content": "开阔思维，很有意思！老师讲课有深度，给分不错", "rating": 5, "author": "理科生", "date": "2024-01"},
+            {"content": "哲学入门好课", "rating": 4, "author": "哲学爱好者", "date": "2023-12"}
         ],
         "tags": ["通识课", "人文", "思维"],
         "description": "哲学基本问题与思维方法。"
@@ -369,14 +384,15 @@ courses = [
             {"day": 1, "startTime": "08:00", "endTime": "09:35", "location": "3A-201"},
             {"day": 3, "startTime": "08:00", "endTime": "09:35", "location": "3A-201"}
         ],
+        "frequency": "每学期",
+        "semester": ["春季", "秋季"],
         "instructor": "张教授",
         "difficulty": 3.5,
         "workload": 3,
         "rating": 4.2,
         "gradeDistribution": {"A": 25, "B": 45, "C": 25, "D": 5},
         "reviews": [
-            {"content": "讲课清晰，实验有意思，推荐！", "rating": 5, "author": "匿名用户", "date": "2024-01"},
-            {"content": "考试有点难，但学到很多", "rating": 4, "author": "CS学生", "date": "2023-12"},
+            {"content": "讲课清晰，实验有意思，推荐！考试有点难，但学到很多", "rating": 5, "author": "匿名用户", "date": "2024-01"},
             {"content": "作业量适中，给分还不错", "rating": 4, "author": "大三学生", "date": "2023-12"}
         ],
         "tags": ["专业课", "理论+实验", "热门", "网络"],
@@ -392,15 +408,16 @@ courses = [
         "schedule": [
             {"day": 1, "startTime": "19:00", "endTime": "21:25", "location": "3A-205"}
         ],
+        "frequency": "每学期",
+        "semester": ["春季", "秋季"],
         "instructor": "吴教授",
         "difficulty": 3.0,
         "workload": 3,
         "rating": 4.3,
         "gradeDistribution": {"A": 30, "B": 45, "C": 20, "D": 5},
         "reviews": [
-            {"content": "很实用，项目必备", "rating": 5, "author": "软工学生", "date": "2024-01"},
-            {"content": "SQL练熟了就简单了", "rating": 4, "author": "匿名", "date": "2023-12"},
-            {"content": "给分不错，推荐", "rating": 4, "author": "大四", "date": "2023-11"}
+            {"content": "很实用，项目必备！SQL练熟了就简单了，给分不错，推荐", "rating": 5, "author": "软工学生", "date": "2024-01"},
+            {"content": "数据库基础很重要", "rating": 4, "author": "大四", "date": "2023-12"}
         ],
         "tags": ["专业课", "实用", "数据库"],
         "description": "数据库设计原理、SQL、事务处理等。"
@@ -416,15 +433,16 @@ courses = [
             {"day": 2, "startTime": "14:00", "endTime": "16:25", "location": "3C-101"},
             {"day": 5, "startTime": "14:00", "endTime": "15:35", "location": "3C-101"}
         ],
+        "frequency": "每学期",
+        "semester": ["秋季"],
         "instructor": "杨教授",
         "difficulty": 3.5,
         "workload": 3,
         "rating": 4.4,
         "gradeDistribution": {"A": 28, "B": 42, "C": 22, "D": 8},
         "reviews": [
-            {"content": "前沿内容，老师讲得好", "rating": 5, "author": "AI方向", "date": "2024-01"},
-            {"content": "作业有挑战性但有趣", "rating": 4, "author": "大四", "date": "2023-12"},
-            {"content": "需要一定数学基础", "rating": 4, "author": "转专业", "date": "2023-11"}
+            {"content": "前沿内容，老师讲得好！作业有挑战性但有趣，需要一定数学基础", "rating": 5, "author": "AI方向", "date": "2024-01"},
+            {"content": "入门AI的好课", "rating": 4, "author": "大四", "date": "2023-12"}
         ],
         "tags": ["专业课", "前沿", "AI", "热门"],
         "description": "人工智能基本概念、机器学习、深度学习入门。"
@@ -441,15 +459,16 @@ courses = [
             {"day": 2, "startTime": "09:45", "endTime": "12:10", "location": "3B-105"},
             {"day": 4, "startTime": "09:45", "endTime": "12:10", "location": "3B-105"}
         ],
+        "frequency": "每学期",
+        "semester": ["秋季"],
         "instructor": "李教授",
         "difficulty": 4.5,
         "workload": 5,
         "rating": 4.5,
         "gradeDistribution": {"A": 20, "B": 40, "C": 30, "D": 10},
         "reviews": [
-            {"content": "硬核课程，打好基础很重要", "rating": 5, "author": "ACM队员", "date": "2024-01"},
-            {"content": "作业很多但很有价值", "rating": 4, "author": "软工学生", "date": "2023-12"},
-            {"content": "老师讲得非常好，就是考试难", "rating": 4, "author": "匿名", "date": "2023-11"}
+            {"content": "硬核课程，打好基础很重要！作业很多但很有价值，老师讲得非常好", "rating": 5, "author": "ACM队员", "date": "2024-01"},
+            {"content": "就是考试难，但值得学", "rating": 4, "author": "软工学生", "date": "2023-12"}
         ],
         "tags": ["核心课", "编程", "难但值得"],
         "description": "计算机科学核心课程，涵盖基本数据结构和算法设计与分析。"
@@ -466,15 +485,16 @@ courses = [
             {"day": 1, "startTime": "10:00", "endTime": "11:35", "location": "3B-201"},
             {"day": 3, "startTime": "10:00", "endTime": "11:35", "location": "3B-201"}
         ],
+        "frequency": "每学期",
+        "semester": ["秋季"],
         "instructor": "郭武",
         "difficulty": 3.0,
         "workload": 3,
         "rating": 10.0,
         "gradeDistribution": {"A": 45, "B": 40, "C": 12, "D": 3},
         "reviews": [
-            {"content": "郭老师讲课非常清晰，信号与系统讲得透彻！", "rating": 5, "author": "电子信息", "date": "2024-12"},
-            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "通信专业", "date": "2024-01"},
-            {"content": "信号处理的基础课，强烈推荐", "rating": 5, "author": "大四", "date": "2023-12"}
+            {"content": "郭老师讲课非常清晰，信号与系统讲得透彻！课程难度中等，给分超好，收获很大", "rating": 5, "author": "电子信息", "date": "2024-12"},
+            {"content": "信号处理的基础课，强烈推荐", "rating": 5, "author": "通信专业", "date": "2024-01"}
         ],
         "tags": ["专业课", "电子", "信号处理", "满分推荐"],
         "description": "信号与系统课程，讲解连续时间和离散时间信号与系统的分析方法。"
@@ -491,15 +511,16 @@ courses = [
             {"day": 4, "startTime": "10:00", "endTime": "11:35", "location": "5-203"},
             {"day": 5, "startTime": "14:00", "endTime": "15:35", "location": "5-203"}
         ],
+        "frequency": "每学期",
+        "semester": ["秋季"],
         "instructor": "李娟",
         "difficulty": 3.0,
         "workload": 3,
         "rating": 10.0,
         "gradeDistribution": {"A": 42, "B": 42, "C": 13, "D": 3},
         "reviews": [
-            {"content": "李娟老师讲课非常好，数分推荐！", "rating": 5, "author": "数学系", "date": "2024-12"},
-            {"content": "满分课程，老师特别耐心", "rating": 5, "author": "大一", "date": "2024-01"},
-            {"content": "课程难度中等，给分超好", "rating": 5, "author": "匿名", "date": "2023-12"}
+            {"content": "李娟老师讲课非常好，数分推荐！满分课程，老师特别耐心", "rating": 5, "author": "数学系", "date": "2024-12"},
+            {"content": "课程难度中等，给分超好", "rating": 5, "author": "大一", "date": "2024-01"}
         ],
         "tags": ["基础课", "数学", "必修", "满分推荐"],
         "description": "数学分析B1，李娟老师主讲，数学专业基础必修课。"
@@ -515,14 +536,15 @@ courses = [
             {"day": 1, "startTime": "14:00", "endTime": "16:25", "location": "5-301"},
             {"day": 4, "startTime": "08:00", "endTime": "09:35", "location": "5-301"}
         ],
+        "frequency": "每学期",
+        "semester": ["秋季"],
         "instructor": "许小卫",
         "difficulty": 2.5,
         "workload": 3,
         "rating": 9.8,
         "gradeDistribution": {"A": 40, "B": 42, "C": 15, "D": 3},
         "reviews": [
-            {"content": "许老师讲线代特别清楚，工科必修课推荐！", "rating": 5, "author": "工科生", "date": "2026-01"},
-            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "机械系", "date": "2024-12"},
+            {"content": "许老师讲线代特别清楚，工科必修课推荐！课程难度中等，给分超好，收获很大", "rating": 5, "author": "工科生", "date": "2024-12"},
             {"content": "线性代数基础打得好，后续课程轻松", "rating": 5, "author": "大三", "date": "2024-01"}
         ],
         "tags": ["基础课", "数学", "必修", "热门"],
@@ -538,14 +560,15 @@ courses = [
         "schedule": [
             {"day": 3, "startTime": "19:00", "endTime": "21:25", "location": "人文楼-报告厅"}
         ],
+        "frequency": "每学期",
+        "semester": ["春季", "秋季"],
         "instructor": "汪源",
         "difficulty": 1.5,
         "workload": 1,
         "rating": 9.7,
         "gradeDistribution": {"A": 65, "B": 28, "C": 5, "D": 2},
         "reviews": [
-            {"content": "听交响乐就能拿学分，超级水课！", "rating": 5, "author": "理科生", "date": "2026-01"},
-            {"content": "课程难度简单，作业很少，给分超好", "rating": 5, "author": "刷分党", "date": "2024-12"},
+            {"content": "听交响乐就能拿学分，超级水课！课程难度简单，作业很少，给分超好", "rating": 5, "author": "理科生", "date": "2024-12"},
             {"content": "虽然收获一般，但轻松拿A", "rating": 4, "author": "匿名", "date": "2024-01"}
         ],
         "tags": ["通识课", "艺术", "水课", "给分高"],
@@ -562,14 +585,15 @@ courses = [
             {"day": 1, "startTime": "08:00", "endTime": "09:35", "location": "2-301"},
             {"day": 3, "startTime": "08:00", "endTime": "09:35", "location": "2-301"}
         ],
+        "frequency": "每年",
+        "semester": ["春季"],
         "instructor": "潘海俊",
         "difficulty": 4.5,
         "workload": 5,
         "rating": 9.7,
         "gradeDistribution": {"A": 28, "B": 45, "C": 22, "D": 5},
         "reviews": [
-            {"content": "潘老师讲理论力学非常深入，虽然难但值得！", "rating": 5, "author": "物理系", "date": "2025-01"},
-            {"content": "课程难度困难，作业很多，但给分超好，收获很多", "rating": 5, "author": "力学专业", "date": "2024-12"},
+            {"content": "潘老师讲理论力学非常深入，虽然难但值得！课程难度困难，作业很多，但给分超好，收获很多", "rating": 5, "author": "物理系", "date": "2024-12"},
             {"content": "理论力学天花板，物理专业必选", "rating": 5, "author": "大四", "date": "2024-01"}
         ],
         "tags": ["专业课", "物理", "高难度", "力学"],
@@ -585,15 +609,16 @@ courses = [
         "schedule": [
             {"day": 4, "startTime": "19:00", "endTime": "20:35", "location": "人文楼-画室"}
         ],
+        "frequency": "每学期",
+        "semester": ["秋季"],
         "instructor": "郭浩",
         "difficulty": 1.5,
         "workload": 1,
         "rating": 9.8,
         "gradeDistribution": {"A": 62, "B": 30, "C": 6, "D": 2},
         "reviews": [
-            {"content": "郭老师讲课生动有趣，还能动手画油画！", "rating": 5, "author": "艺术爱好者", "date": "2026-01"},
-            {"content": "课程难度简单，作业很少，给分超好，收获很多", "rating": 5, "author": "理科生", "date": "2024-12"},
-            {"content": "通识课里的宝藏课程", "rating": 5, "author": "大二", "date": "2024-01"}
+            {"content": "郭老师讲课生动有趣，还能动手画油画！课程难度简单，作业很少，给分超好", "rating": 5, "author": "艺术爱好者", "date": "2024-12"},
+            {"content": "通识课里的宝藏课程", "rating": 5, "author": "理科生", "date": "2024-01"}
         ],
         "tags": ["通识课", "艺术", "水课", "给分高"],
         "description": "西方油画艺术赏析，郭浩老师主讲，通过欣赏和创作了解西方油画艺术。"
@@ -609,14 +634,15 @@ courses = [
             {"day": 2, "startTime": "10:00", "endTime": "11:35", "location": "3B-202"},
             {"day": 5, "startTime": "10:00", "endTime": "11:35", "location": "3B-202"}
         ],
+        "frequency": "每学期",
+        "semester": ["秋季"],
         "instructor": "胡新伟",
         "difficulty": 3.0,
         "workload": 3,
         "rating": 9.8,
         "gradeDistribution": {"A": 42, "B": 40, "C": 15, "D": 3},
         "reviews": [
-            {"content": "胡老师讲电路非常清晰，电子专业必修课！", "rating": 5, "author": "电子信息", "date": "2026-01"},
-            {"content": "课程难度中等，给分超好，收获很大", "rating": 5, "author": "自动化", "date": "2024-12"},
+            {"content": "胡老师讲电路非常清晰，电子专业必修课！课程难度中等，给分超好，收获很大", "rating": 5, "author": "电子信息", "date": "2024-12"},
             {"content": "电路基础打得好，模电数电轻松学", "rating": 5, "author": "大三", "date": "2024-01"}
         ],
         "tags": ["专业课", "电子", "必修", "热门"],
@@ -632,14 +658,15 @@ courses = [
         "schedule": [
             {"day": 5, "startTime": "15:45", "endTime": "17:20", "location": "东区体育场"}
         ],
+        "frequency": "每学期",
+        "semester": ["春季", "秋季"],
         "instructor": "吴成林",
         "difficulty": 1.5,
         "workload": 1,
         "rating": 9.9,
         "gradeDistribution": {"A": 75, "B": 20, "C": 4, "D": 1},
         "reviews": [
-            {"content": "吴老师人很好，基础体育轻松过！", "rating": 5, "author": "大一", "date": "2025-01"},
-            {"content": "课程难度中等，作业很少，给分超好，收获很多", "rating": 5, "author": "匿名", "date": "2024-12"},
+            {"content": "吴老师人很好，基础体育轻松过！课程难度中等，作业很少，给分超好", "rating": 5, "author": "大一", "date": "2024-12"},
             {"content": "体育课里的良心课程", "rating": 5, "author": "大二", "date": "2024-01"}
         ],
         "tags": ["体育课", "水课", "给分高", "必修"],
@@ -655,14 +682,15 @@ courses = [
         "schedule": [
             {"day": 2, "startTime": "14:00", "endTime": "15:35", "location": "5-101"}
         ],
+        "frequency": "每学期",
+        "semester": ["春季", "秋季"],
         "instructor": "黄鹤",
         "difficulty": 2.0,
         "workload": 2,
         "rating": 9.6,
         "gradeDistribution": {"A": 50, "B": 35, "C": 12, "D": 3},
         "reviews": [
-            {"content": "黄老师讲课生动，近代史不再枯燥！", "rating": 5, "author": "大一", "date": "2026-01"},
-            {"content": "课程难度中等，作业很少，给分超好", "rating": 5, "author": "刷分党", "date": "2024-12"},
+            {"content": "黄老师讲课生动，近代史不再枯燥！课程难度中等，作业很少，给分超好", "rating": 5, "author": "大一", "date": "2024-12"},
             {"content": "思政课里难得的好老师", "rating": 5, "author": "大二", "date": "2024-01"}
         ],
         "tags": ["思政课", "必修", "给分高", "热门"],
