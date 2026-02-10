@@ -9,6 +9,6 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.0
       - key: DEEPSEEK_API_KEY
-        value: sk-4ea33f07d6b44a1b8a55d8d6cfb8b121
+        value: your_key
       - key: PORT
         value: 3000
