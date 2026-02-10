@@ -4,7 +4,7 @@ import httpx
 from typing import Dict, Any
 
 BASE_URL = "https://api.deepseek.com/v1/chat/completions"
-API_KEY = os.getenv("DEEPSEEK_API_KEY", "sk-4ea33f07d6b44a1b8a55d8d6cfb8b121")
+API_KEY = os.getenv("DEEPSEEK_API_KEY", "your_api_key")
 
 SYSTEM_PROMPT = """你是「课神」—— 一位高瞻远瞩、睿智通透的选课智囊。
 
